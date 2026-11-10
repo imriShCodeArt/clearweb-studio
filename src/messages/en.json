@@ -1,0 +1,269 @@
+{
+  "metadata": {
+    "title": "Clear Web | The Digital Workshop",
+    "description": "Custom websites, web applications and ongoing development with design, technology and business focus."
+  },
+  "shell": {
+    "brand": "Clear Web",
+    "navLabel": "Main",
+    "menuLabel": "Open menu",
+    "closeLabel": "Close menu",
+    "home": "Home",
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "talk": "Let's Talk",
+    "changeLanguage": "Change language to {language}",
+    "footer": {
+      "tagline": "Web development that turns business goals into real results.",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "website": "Website",
+      "services": {
+        "title": "Services",
+        "websites": "Business Websites",
+        "applications": "Web Applications",
+        "landing": "Landing Pages",
+        "ongoing": "Ongoing Development"
+      },
+      "process": {
+        "title": "Process",
+        "how": "How We Work",
+        "discovery": "Discovery",
+        "architecture": "Architecture",
+        "development": "Development",
+        "launch": "Launch"
+      },
+      "company": {
+        "title": "Company",
+        "about": "About",
+        "work": "Work",
+        "insights": "Insights",
+        "contact": "Contact"
+      },
+      "cta": {
+        "title": "Let's talk about your project",
+        "description": "A short call to explore your goals and the best way forward.",
+        "action": "Book a Call"
+      },
+      "rights": "All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "accessibility": "Accessibility Statement"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Web development studio",
+      "line1": "The Digital",
+      "line2": "Workshop",
+      "description": "Turning ideas into powerful, custom digital products — with the right mix of design, technology and business focus.",
+      "start": "Start a project",
+      "process": "See how it works"
+    },
+    "process": {
+      "eyebrow": "The process",
+      "line1": "From",
+      "line2": "Concept",
+      "leadIn": "to",
+      "emphasis": "Launch",
+      "title": "From concept to launch",
+      "description": "A simple four-stage path from the first conversation to a product that is ready to go live.",
+      "steps": {
+        "discovery": {
+          "title": "Discovery",
+          "description": "Understanding your goals, users and business needs."
+        },
+        "design": {
+          "title": "Design",
+          "description": "Turning insights into a clear, effective and unique design."
+        },
+        "development": {
+          "title": "Development",
+          "description": "Building a fast, scalable and reliable solution."
+        },
+        "launch": {
+          "title": "Launch",
+          "description": "Going live and making sure everything works perfectly."
+        }
+      }
+    },
+    "features": {
+      "label": "Features",
+      "items": {
+        "performance": {
+          "title": "High Performance",
+          "description": "Fast, stable and scalable."
+        },
+        "mobile": {
+          "title": "Mobile First",
+          "description": "A great experience on any device."
+        },
+        "accessibility": {
+          "title": "Accessibility",
+          "description": "Inclusive and standards-compliant."
+        },
+        "business": {
+          "title": "Business Focused",
+          "description": "Built to drive real results."
+        }
+      }
+    },
+    "build": {
+      "eyebrow": "What I build",
+      "line1": "Tailored Digital",
+      "emphasis": "Solutions",
+      "description": "Websites, web applications and ongoing development — built around your goals.",
+      "items": {
+        "websites": {
+          "title": "Websites",
+          "description": "Business websites, landing pages and e-commerce."
+        },
+        "applications": {
+          "title": "Web Applications",
+          "description": "Custom systems, portals and business software."
+        },
+        "ongoing": {
+          "title": "Ongoing Development",
+          "description": "Improvements, integrations, maintenance and more."
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "About",
+      "line1": "Hi, I'm",
+      "name": "Imri Weinberg",
+      "description": "A full-stack developer who combines technical expertise, design thinking and a business mindset to build digital products that create real results.",
+      "more": "More About Me"
+    },
+    "contact": {
+      "line1": "Let's Build",
+      "line2": "Something",
+      "emphasis": "Together.",
+      "description": "Have a project in mind? Let's talk about your goals and turn them into a digital product that works.",
+      "talk": "Let's Talk"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About me",
+      "line1": "Hi, I'm",
+      "name": "Imri Weinberg",
+      "role": "Full-Stack Developer & Digital Product Builder",
+      "description": "I help businesses turn ideas into high-performing websites and web applications — from strategy and design to development and launch.",
+      "stats": {
+        "projects": {
+          "value": "50",
+          "label": "Projects Delivered"
+        },
+        "clients": {
+          "value": "12",
+          "label": "Happy Clients"
+        },
+        "years": {
+          "value": "10",
+          "label": "Years of Experience"
+        }
+      }
+    },
+    "approach": {
+      "label": "My approach",
+      "eyebrow": "My approach",
+      "line1": "A Hands-On",
+      "line2": "Partner",
+      "description": "I work closely with you, combining technical expertise, business thinking and a strong eye for design to build solutions that create real results.",
+      "pillars": {
+        "strategy": {
+          "title": "Strategy & Planning",
+          "description": "Turning goals into a clear, practical roadmap."
+        },
+        "design": {
+          "title": "Design & Development",
+          "description": "Crafting fast, modern and scalable digital products."
+        },
+        "launch": {
+          "title": "Launch & Growth",
+          "description": "Getting your product live and helping it perform and grow."
+        }
+      }
+    },
+    "drive": {
+      "label": "What drives me",
+      "eyebrow": "What drives me",
+      "line1": "My",
+      "line2": "Values",
+      "values": {
+        "quality": {
+          "title": "Quality First",
+          "description": "Clean code, great UX and long-term reliability."
+        },
+        "partnership": {
+          "title": "Real Partnership",
+          "description": "Open communication, full transparency, and commitment."
+        },
+        "impact": {
+          "title": "Business Impact",
+          "description": "Solutions that are not just beautiful, but drive real results."
+        }
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Services",
+      "line1": "From Idea to",
+      "line2": "Digital Product",
+      "description": "Custom websites, web applications and ongoing development — built to solve real business challenges and drive measurable results."
+    },
+    "offerings": {
+      "label": "Services",
+      "websites": {
+        "title": "Websites",
+        "description": "Distinctive business websites, landing pages and e-commerce experiences that look great and convert.",
+        "sites": "Business Sites",
+        "commerce": "E-commerce",
+        "landing": "Landing Pages"
+      },
+      "applications": {
+        "title": "Web Applications",
+        "description": "Custom systems, customer portals and business tools that streamline work and create real value.",
+        "systems": "Custom Systems",
+        "portals": "Client Portals",
+        "tools": "Business Tools"
+      },
+      "ongoing": {
+        "title": "Ongoing Development",
+        "description": "Long-term support, improvements and new features to keep your product stable, fast and growing.",
+        "improvements": "Improvements",
+        "integrations": "Integrations",
+        "maintenance": "Maintenance"
+      }
+    },
+    "work": {
+      "label": "How we work",
+      "eyebrow": "How we work",
+      "line1": "From discovery",
+      "line2": "to launch",
+      "description": "Four focused stages, from the first conversation to a product that is live.",
+      "steps": {
+        "discovery": {
+          "title": "Discovery",
+          "description": "Understanding the goals, the users and the problem worth solving."
+        },
+        "architecture": {
+          "title": "Architecture",
+          "description": "Shaping the structure, the flows and the technical plan."
+        },
+        "development": {
+          "title": "Development",
+          "description": "Building a fast, reliable product you can actually use."
+        },
+        "launch": {
+          "title": "Launch",
+          "description": "Going live, checking every detail and staying on as it grows."
+        }
+      }
+    }
+  }
+}
