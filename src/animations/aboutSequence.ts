@@ -1,5 +1,5 @@
 import { heroSpanFromCounts, listSpan } from "@/animations/about";
-import { createSectionSequence } from "@/animations/sectionSequence";
+import { createSectionSequence, openingWhenReached } from "@/animations/sectionSequence";
 
 const SECTIONS = ["about-hero", "about-approach", "about-drive"] as const;
 
@@ -14,7 +14,7 @@ function spanFor(element: HTMLElement) {
   return listSpan(element.querySelectorAll("li").length);
 }
 
-const about = createSectionSequence(SECTIONS, spanFor);
+const about = createSectionSequence(SECTIONS, spanFor, openingWhenReached(0.65));
 
 export const resetAboutSequence = about.reset;
 export const whenAboutPlays = about.whenPlays;

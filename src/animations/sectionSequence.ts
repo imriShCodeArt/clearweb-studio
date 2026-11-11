@@ -2,9 +2,9 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 /**
  * Sections play in page order. A section already on screen waits until the
- * one above it finishes. On a phone, scrolling to a section starts the items
- * already in view; items still below wait until the reader reaches them.
- * A hero plays every item once that hero starts.
+ * one above it finishes. Below the desktop row, items still further down the
+ * page wait until they are scrolled into view. A hero plays every item once
+ * that hero starts.
  */
 
 type PlayMode = "group" | "item";
@@ -16,12 +16,18 @@ type Waiter = {
   played: boolean;
 };
 
+type Opening = {
+  inOpening: (element: HTMLElement) => boolean;
+  /** Read when a section is armed, so the line can follow the viewport. */
+  start: string;
+};
+
 type SectionSequence = {
   sections: readonly string[];
   spanFor: (element: HTMLElement) => number;
+  opening: Opening;
   generation: number;
   settleFrame: number;
-  start: string;
   arming: boolean;
   started: Set<string>;
   waiters: Map<string, Waiter[]>;
@@ -29,6 +35,10 @@ type SectionSequence = {
   listening: boolean;
   whenPlays: (element: HTMLElement, play: Play) => void;
 };
+
+function openingStart(sequence: SectionSequence) {
+  return sequence.opening.start;
+}
 
 const sequences: SectionSequence[] = [];
 
@@ -70,10 +80,36 @@ export function openingAt(share: number) {
   };
 }
 
-/** Phones reveal stacked items one by one. A hero plays its whole entrance together. */
+const stacked = "(max-width: 1199.95px)";
+
+/**
+ * On a wide screen, a section already in view joins the opening.
+ * Below that, its top must reach `share` of the viewport, so a sliver
+ * under the section above waits for a scroll.
+ */
+export function openingWhenReached(share: number) {
+  const line = Math.round(share * 100);
+
+  return {
+    inOpening(element: HTMLElement) {
+      const rect = element.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return false;
+      if (!window.matchMedia(stacked).matches) return true;
+      return rect.top <= window.innerHeight * share;
+    },
+    get start() {
+      return window.matchMedia(stacked).matches ? `top ${line}%` : "top 80%";
+    },
+  };
+}
+
+/**
+ * Stacked layouts reveal items one by one. A hero plays its whole entrance
+ * together, and a wide row that shares the screen still plays as a group.
+ */
 function itemByItem(sectionId?: string) {
   if (sectionId === "hero" || sectionId?.endsWith("-hero")) return false;
-  return window.matchMedia("(max-width: 599.95px)").matches;
+  return window.matchMedia("(max-width: 1199.95px)").matches;
 }
 
 function entered(element: HTMLElement, start: string) {
@@ -94,7 +130,9 @@ function releaseWaiting(sequence: SectionSequence) {
 
     const rest: Waiter[] = [];
     for (const waiter of queued) {
-      if (!waiter.played && entered(waiter.element, sequence.start)) finish(waiter, "item");
+      if (!waiter.played && entered(waiter.element, openingStart(sequence))) {
+        finish(waiter, "item");
+      }
       if (!waiter.played) rest.push(waiter);
     }
     sequence.waiters.set(id, rest);
@@ -127,7 +165,7 @@ function flush(sequence: SectionSequence, id: string) {
 
   const rest: Waiter[] = [];
   for (const waiter of queued) {
-    if (entered(waiter.element, sequence.start)) finish(waiter, "group");
+    if (entered(waiter.element, openingStart(sequence))) finish(waiter, "group");
     else rest.push(waiter);
   }
   sequence.waiters.set(id, rest);
@@ -156,7 +194,7 @@ function armScroll(sequence: SectionSequence, element: HTMLElement, start: strin
 export function createSectionSequence(
   sections: readonly string[],
   spanFor: (element: HTMLElement) => number,
-  opening: { inOpening: (element: HTMLElement) => boolean; start: string } = {
+  opening: Opening = {
     inOpening: onScreen,
     start: "top 80%",
   },
@@ -164,9 +202,9 @@ export function createSectionSequence(
   const sequence = {
     sections,
     spanFor,
+    opening,
     generation: 0,
     settleFrame: 0,
-    start: opening.start,
     arming: false,
     listening: false,
     started: new Set<string>(),
@@ -185,7 +223,7 @@ export function createSectionSequence(
     if (itemByItem(section.id)) ensureScroll(sequence);
 
     if (sequence.started.has(section.id)) {
-      if (!itemByItem(section.id) || entered(element, sequence.start)) {
+      if (!itemByItem(section.id) || entered(element, openingStart(sequence))) {
         finish(waiter, itemByItem(section.id) ? "item" : "group");
       } else {
         const queued = sequence.waiters.get(section.id) ?? [];

@@ -4,7 +4,9 @@ import { useRef } from "react";
 import Box from "@mui/material/Box";
 
 import { whenHeroPlays } from "@/animations/heroGate";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { beats, homeMotion } from "@/animations/home";
+import { whenSequenced } from "@/animations/sequences";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const HEBREW = "אבגדהוזחטיכלמנסעפצקרשת";
 const LATIN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -170,14 +172,38 @@ function CountReel({
       };
       const proxy = { value: 0 };
       render(0);
-      gsap.to(proxy, {
+      const count = gsap.to(proxy, {
         value: parsed.target,
         duration,
         delay,
         ease: "none",
+        paused: true,
         onUpdate() {
           render(proxy.value);
         },
+      });
+
+      const play = () => count.play();
+
+      if (scope.closest("#hero")) {
+        whenHeroPlays(scope, play);
+        return;
+      }
+
+      if (
+        whenSequenced(scope, (mode) => {
+          if (mode === "item") count.delay(0);
+          play();
+        })
+      ) {
+        return;
+      }
+
+      ScrollTrigger.create({
+        trigger: scope.closest(`[data-animate="${beats.fade}"]`) ?? scope,
+        start: homeMotion.reveal.start,
+        once: homeMotion.reveal.once,
+        onEnter: play,
       });
     },
     { scope: root, dependencies: [text, delay, duration] },

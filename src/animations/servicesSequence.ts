@@ -1,4 +1,4 @@
-import { createSectionSequence, openingAt } from "@/animations/sectionSequence";
+import { createSectionSequence, openingWhenReached } from "@/animations/sectionSequence";
 import { servicesHeroSpan, servicesMotion, staggeredSpan } from "@/animations/services";
 
 const SECTIONS = ["services-hero", "services-offerings", "services-work"] as const;
@@ -11,8 +11,8 @@ function spanFor(element: HTMLElement) {
   return staggeredSpan(count, lead);
 }
 
-/** A phone only shows a sliver of the next section, so that sliver waits for a scroll. */
-const services = createSectionSequence(SECTIONS, spanFor, openingAt(0.4));
+/** A sliver of the next section waits until its top is scrolled into view. */
+const services = createSectionSequence(SECTIONS, spanFor, openingWhenReached(0.65));
 
 export const resetServicesSequence = services.reset;
 export const watchServicesSequence = services.watch;

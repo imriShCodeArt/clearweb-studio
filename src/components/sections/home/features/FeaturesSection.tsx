@@ -48,6 +48,7 @@ export async function FeaturesSection() {
             title={t(`items.${feature.id}.title`)}
             description={t(`items.${feature.id}.description`)}
             divided={index > 0}
+            order={index}
           />
         ))}
       </RevealGroup>
