@@ -64,7 +64,7 @@ export async function HeroSection() {
           </MarkedHeading>
         </Box>
         <FadeIn delay={hero.description} sx={{ gridArea: "copy", minWidth: 0, ...headingCopy }}>
-          <Text tone="secondary">{t("description")}</Text>
+          <Text sx={{'textAlign':'center'}} tone="secondary">{t("description")}</Text>
         </FadeIn>
       </Box>
       <FadeIn
