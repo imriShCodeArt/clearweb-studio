@@ -18,15 +18,12 @@ export const aboutMotion = {
 const countScale = 1.6;
 
 export function heroStatPlan(amounts: number[]) {
-  const fade = homeMotion.fade.duration;
   const longest = Math.max(...amounts, 1);
   const counts = amounts.map((amount) => (amount / longest) * countScale);
 
   const items = counts.map((duration, index) => ({
     duration,
-    delay:
-      aboutMotion.hero.stats +
-      counts.slice(0, index).reduce((sum, count) => sum + fade + count, 0),
+    delay: aboutMotion.hero.stats + index * aboutMotion.stagger,
   }));
 
   return { items, end: heroSpanFromCounts(counts) };
@@ -35,17 +32,15 @@ export function heroStatPlan(amounts: number[]) {
 /** Seconds from the hero start until its last item has finished. */
 export function heroSpanFromCounts(counts: number[]) {
   const fade = homeMotion.fade.duration;
-  let end = Math.max(
+  const heroEnd = Math.max(
     ...Object.values(aboutMotion.hero).map((at) => at + fade),
   );
+  const statEnds = counts.map((count, index) => {
+    const start = aboutMotion.hero.stats + index * aboutMotion.stagger;
+    return start + fade - 0.4 + count;
+  });
 
-  let time = aboutMotion.hero.stats;
-  for (const count of counts) {
-    end = Math.max(end, time + fade, time + fade - 0.4 + count);
-    time += fade + count;
-  }
-
-  return end;
+  return Math.max(heroEnd, ...statEnds);
 }
 
 /** Seconds from a list section start until its last card has finished. */
