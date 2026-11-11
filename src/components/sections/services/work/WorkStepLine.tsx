@@ -14,7 +14,7 @@ const {
 } = beamTrack;
 
 const beamMotion = {
-  animationDuration: "1.8s",
+  animationDuration: "3.2s",
   animationTimingFunction: "linear",
   animationIterationCount: "infinite",
 } as const;
