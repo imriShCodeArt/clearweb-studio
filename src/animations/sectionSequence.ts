@@ -80,12 +80,11 @@ export function openingAt(share: number) {
   };
 }
 
-const stacked = "(max-width: 1199.95px)";
-
 /**
- * On a wide screen, a section already in view joins the opening.
- * Below that, its top must reach `share` of the viewport, so a sliver
- * under the section above waits for a scroll.
+ * A section joins the opening once its top has reached `share` of the viewport.
+ * Anything still below that line waits for a scroll. The scroll line matches,
+ * so a section that has already passed it is not left waiting for an enter
+ * that never fires.
  */
 export function openingWhenReached(share: number) {
   const line = Math.round(share * 100);
@@ -93,13 +92,10 @@ export function openingWhenReached(share: number) {
   return {
     inOpening(element: HTMLElement) {
       const rect = element.getBoundingClientRect();
-      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return false;
-      if (!window.matchMedia(stacked).matches) return true;
+      if (rect.bottom <= 0) return false;
       return rect.top <= window.innerHeight * share;
     },
-    get start() {
-      return window.matchMedia(stacked).matches ? `top ${line}%` : "top 80%";
-    },
+    start: `top ${line}%`,
   };
 }
 
