@@ -18,7 +18,7 @@ export async function FeaturesSection() {
       sx={{
         backgroundColor: "#E7E2DF",
         backgroundImage:
-          "linear-gradient(to bottom, rgba(11, 12, 13, 0.38) 0%, rgba(11, 12, 13, 0.05) 34%, rgba(11, 12, 13, 0.05) 66%, rgba(11, 12, 13, 0.38) 100%), url(/homepage/features-section-bg.png)",
+          "linear-gradient(to bottom, rgba(11, 12, 13, 0.38) 0%, rgba(11, 12, 13, 0.05) 34%, rgba(11, 12, 13, 0.05) 66%, rgba(11, 12, 13, 0.38) 100%), url(/homepage/features/features-section-bg.png)",
         backgroundSize: "100% 100%, cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

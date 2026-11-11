@@ -1,7 +1,6 @@
 import Box, { type BoxProps } from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
+import type { Breakpoint, SxProps, Theme } from "@mui/material/styles";
 
-type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 type Track = number | string;
 type Responsive<T> = T | Partial<Record<Breakpoint, T>>;
 
@@ -15,7 +14,7 @@ type ColumnsProps = Omit<BoxProps, "sx"> & {
   sx?: SxProps<Theme>;
 };
 
-const breakpoints = ["sm", "md", "lg", "xl"] as const;
+const breakpoints = ["sm", "md", "lg", "xl", "xxl"] as const;
 
 export function Columns({
   columns,

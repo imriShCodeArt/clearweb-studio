@@ -59,7 +59,7 @@ export function AboutBackdrop() {
           "@media (prefers-reduced-motion: reduce)": {
             transform: "none",
           },
-          backgroundImage: "url(/about/about-drive-section-bg-image.png)",
+          backgroundImage: "url(/about/drive/about-drive-section-bg-image.png)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center bottom",
           backgroundSize: {xs: "100% auto", xl:"100% auto"},

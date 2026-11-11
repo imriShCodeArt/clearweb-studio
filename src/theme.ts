@@ -1,5 +1,12 @@
 import { createTheme, type Direction } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+  interface BreakpointOverrides {
+    xxl: true;
+    xxxl: true;
+  }
+}
+
 export const clearWebColors = {
   background: "#0B0C0D",
   surface: "#171719",
@@ -21,6 +28,17 @@ export const clearWebColors = {
 export function createAppTheme(direction: Direction) {
   return createTheme({
   direction,
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      xxl: 1920,
+      xxxl: 2220,
+    },
+  },
 
   palette: {
     mode: "dark",

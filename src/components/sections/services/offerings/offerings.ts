@@ -23,7 +23,7 @@ export const offerings = [
     id: "websites",
     index: "01",
     image: {
-      src: "/services/services-products-01-websites-development.png",
+      src: "/services/offerings/services-products-01-websites-development.png",
       width: 1478,
       height: 995,
     },
@@ -38,7 +38,7 @@ export const offerings = [
     id: "applications",
     index: "02",
     image: {
-      src: "/services/services-products-02-web-apps-development.png",
+      src: "/services/offerings/services-products-02-web-apps-development.png",
       width: 1134,
       height: 836,
     },
@@ -53,7 +53,7 @@ export const offerings = [
     id: "ongoing",
     index: "03",
     image: {
-      src: "/services/services-products-03-ongoing-development.png",
+      src: "/services/offerings/services-products-03-ongoing-development.png",
       width: 1192,
       height: 1116,
     },

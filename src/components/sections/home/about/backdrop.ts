@@ -11,9 +11,9 @@ export const photoShade = [
 ].join(" ");
 
 export const photos = {
-  mobile: "/homepage/about-section-bg-MOBILE.png",
-  desktop: "/homepage/about-section-bg.png",
-  widescreen: "/homepage/about-section-bg-WIDESCREEN.png",
+  mobile: "/homepage/about/about-section-bg-MOBILE.png",
+  desktop: "/homepage/about/about-section-bg.png",
+  widescreen: "/homepage/about/about-section-bg-WIDESCREEN.png",
 } as const;
 
 export const scrim = {
