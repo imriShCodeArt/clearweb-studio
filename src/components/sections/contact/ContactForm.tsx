@@ -133,7 +133,10 @@ export function ContactForm() {
         value={fields.phone}
         onChange={onField}
         placeholder={t("form.phone")}
-        sx={fieldStyle()}
+        sx={{
+          ...fieldStyle(),
+          "& .MuiInputBase-input": { textAlign: "left" },
+        }}
         slotProps={{
           htmlInput: { "aria-label": t("form.phone") },
           input: { startAdornment: adorn(PhoneOutlined) },
