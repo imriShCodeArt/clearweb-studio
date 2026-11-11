@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { AppBar } from "./AppBar";
 import { Footer } from "./Footer";
 import { MobileNav } from "./MobileNav";
+import { PageFade } from "./PageFade";
 import type { SiteFooter } from "@/config/site";
 
 import type { ShellNavItem } from "./nav";
@@ -63,9 +64,7 @@ export function AppShell({
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
       />
-      <Box component="main" sx={{ flex: 1 }}>
-        {children}
-      </Box>
+      <PageFade>{children}</PageFade>
       <Footer brand={brand} brandHref={brandHref} footer={footer} />
     </Box>
   );
