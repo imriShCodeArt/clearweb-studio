@@ -69,7 +69,7 @@ const DEFAULT_DURATION = 10;
 const DEFAULT_FROM: Rgb = [247, 190, 0];
 const DEFAULT_TO: Rgb = [122, 78, 0];
 
-const DEFAULT_LAYERS = 4;
+const DEFAULT_LAYERS = 0;
 const DEFAULT_STEP = 1.8;
 const MAX_LAYERS = 16;
 
