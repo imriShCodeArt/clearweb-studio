@@ -4,7 +4,9 @@ import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
 import Box from "@mui/material/Box";
 import { getTranslations } from "next-intl/server";
 
+import { CopyLink, Link } from "@/components/actions";
 import { Eyebrow, MarkedHeading, Text } from "@/components/typography";
+import { maskPhone, site } from "@/config/site";
 import { getLocaleDirection } from "@/i18n/locale";
 import type { Locale } from "@/i18n/routing";
 
@@ -13,8 +15,8 @@ import { ContactChannel } from "./ContactChannel";
 export async function ContactIntro({ locale }: { locale: Locale }) {
   const t = await getTranslations("contact");
   const direction = getLocaleDirection(locale);
-  const phone = t("channels.phone.value");
-  const email = t("channels.email.value");
+  const phone = site.phone;
+  const email = site.email;
 
   return (
     <Box dir={direction} sx={{ minWidth: 0, maxWidth: 560 }}>
@@ -52,24 +54,27 @@ export async function ContactIntro({ locale }: { locale: Locale }) {
           gap: { xs: 2.5, md: 3.5 },
         }}
       >
-        <ContactChannel
-          icon={<PhoneOutlined sx={{ fontSize: 18 }} />}
-          label={t("channels.phone.label")}
-          value={phone}
-          href={`tel:${phone.replace(/[^\d+]/g, "")}`}
-        />
-        <ContactChannel
-          icon={<EmailOutlined sx={{ fontSize: 18 }} />}
-          label={t("channels.email.label")}
-          value={email}
-          href={`mailto:${email}`}
-        />
-        <ContactChannel
-          icon={<CalendarMonthOutlined sx={{ fontSize: 18 }} />}
-          label={t("channels.call.label")}
-          value={t("channels.call.value")}
-          href="#contact-form"
-        />
+        <CopyLink href={`tel:${phone.replace(/[^\d+]/g, "")}`} value={phone}>
+          <ContactChannel
+            icon={<PhoneOutlined sx={{ fontSize: 18 }} />}
+            label={t("channels.phone.label")}
+            value={maskPhone(phone)}
+          />
+        </CopyLink>
+        <CopyLink href={`mailto:${email}`} value={email}>
+          <ContactChannel
+            icon={<EmailOutlined sx={{ fontSize: 18 }} />}
+            label={t("channels.email.label")}
+            value={email}
+          />
+        </CopyLink>
+        <Link href="#contact-form" underline="none" sx={{ color: "inherit" }}>
+          <ContactChannel
+            icon={<CalendarMonthOutlined sx={{ fontSize: 18 }} />}
+            label={t("channels.call.label")}
+            value={t("channels.call.value")}
+          />
+        </Link>
       </Box>
     </Box>
   );

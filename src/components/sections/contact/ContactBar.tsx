@@ -2,7 +2,7 @@ import LinkedIn from "@mui/icons-material/LinkedIn";
 import LinkOutlined from "@mui/icons-material/LinkOutlined";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import ScheduleOutlined from "@mui/icons-material/ScheduleOutlined";
-import YouTube from "@mui/icons-material/YouTube";
+import Facebook from "@mui/icons-material/Facebook";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { getTranslations } from "next-intl/server";
@@ -14,7 +14,7 @@ import { ContactBarFact } from "./ContactBarFact";
 
 const socialIcons = {
   linkedin: LinkedIn,
-  youtube: YouTube,
+  facebook: Facebook,
   website: LinkOutlined,
 } as const;
 

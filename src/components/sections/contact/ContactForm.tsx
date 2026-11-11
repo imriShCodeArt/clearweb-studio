@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState, useState, type ChangeEvent } from "react";
 import ChatBubbleOutlineOutlined from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import EmailOutlined from "@mui/icons-material/EmailOutlined";
 import LockOutlined from "@mui/icons-material/LockOutlined";
@@ -11,6 +11,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import { useTranslations } from "next-intl";
 
+import { sendInquiry } from "@/actions/sendInquiry";
 import { Button } from "@/components/actions";
 import { TextField } from "@/components/forms";
 import { Text } from "@/components/typography";
@@ -30,32 +31,41 @@ function fieldStyle(multiline = false) {
   };
 }
 
+const emptyFields = { name: "", email: "", phone: "", message: "" };
+
 export function ContactForm() {
   const t = useTranslations("contact");
-  const [sent, setSent] = useState(false);
+  const [fields, setFields] = useState(emptyFields);
+  const [state, submit, pending] = useActionState(sendInquiry, {
+    status: "idle" as const,
+    ticket: 0,
+  });
+  const [clearedTicket, setClearedTicket] = useState(0);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
-    const body = [name, email, phone, "", message].join("\n");
-    const href =
-      `mailto:${t("channels.email.value")}` +
-      `?subject=${encodeURIComponent(t("form.subject", { name }))}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = href;
-    setSent(true);
+  if (state.status === "sent" && clearedTicket !== state.ticket) {
+    setClearedTicket(state.ticket);
+    setFields(emptyFields);
   }
+
+  function onField(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = event.target;
+    setFields((current) => ({ ...current, [name]: value }));
+  }
+  const note =
+    pending
+      ? t("form.sending")
+      : state.status === "sent"
+        ? t("form.sent")
+        : state.status === "error"
+          ? t("form.error")
+          : t("form.note");
 
   return (
     <Box
       component="form"
       id="contact-form"
-      onSubmit={onSubmit}
+      action={submit}
+      aria-busy={pending}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -91,6 +101,8 @@ export function ContactForm() {
           name="name"
           required
           autoComplete="name"
+          value={fields.name}
+          onChange={onField}
           placeholder={t("form.name")}
           sx={fieldStyle()}
           slotProps={{
@@ -103,6 +115,8 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
+          value={fields.email}
+          onChange={onField}
           placeholder={t("form.email")}
           sx={fieldStyle()}
           slotProps={{
@@ -116,6 +130,8 @@ export function ContactForm() {
         name="phone"
         type="tel"
         autoComplete="tel"
+        value={fields.phone}
+        onChange={onField}
         placeholder={t("form.phone")}
         sx={fieldStyle()}
         slotProps={{
@@ -129,6 +145,8 @@ export function ContactForm() {
         required
         multiline
         minRows={4}
+        value={fields.message}
+        onChange={onField}
         placeholder={t("form.message")}
         sx={fieldStyle(true)}
         slotProps={{
@@ -141,6 +159,7 @@ export function ContactForm() {
         type="submit"
         variant="contained"
         fullWidth
+        disabled={pending}
         endIcon={
           <ArrowOutwardOutlined
             sx={{ '[dir="rtl"] &': { transform: "scaleX(-1)" } }}
@@ -148,13 +167,13 @@ export function ContactForm() {
         }
         sx={{ minHeight: 52, fontSize: "1rem" }}
       >
-        {t("form.submit")}
+        {pending ? t("form.sending") : t("form.submit")}
       </Button>
 
-      <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>
+      <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }} aria-live="polite">
         <LockOutlined sx={{ mt: "2px", fontSize: 16, color: "text.disabled" }} />
         <Text tone="muted" variant="body2">
-          {sent ? t("form.sent") : t("form.note")}
+          {note}
         </Text>
       </Box>
     </Box>

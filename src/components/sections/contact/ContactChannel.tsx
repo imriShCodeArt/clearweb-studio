@@ -1,29 +1,23 @@
 import type { ReactNode } from "react";
 import Box from "@mui/material/Box";
 
-import { Link } from "@/components/actions";
 import { Text } from "@/components/typography";
 
 export function ContactChannel({
   icon,
   label,
   value,
-  href,
 }: {
   icon: ReactNode;
   label: string;
   value: string;
-  href: string;
 }) {
   return (
-    <Link
-      href={href}
-      underline="none"
+    <Box
       sx={{
         display: "flex",
         alignItems: "center",
         gap: 1.25,
-        color: "inherit",
         minWidth: 0,
       }}
     >
@@ -50,6 +44,6 @@ export function ContactChannel({
           {value}
         </Text>
       </Box>
-    </Link>
+    </Box>
   );
 }

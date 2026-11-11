@@ -14,11 +14,12 @@
     "about": "About",
     "contact": "Contact",
     "talk": "Let's Talk",
+    "copied": "Copied to clipboard",
     "changeLanguage": "Change language to {language}",
     "footer": {
       "tagline": "Web development that turns business goals into real results.",
       "linkedin": "LinkedIn",
-      "youtube": "YouTube",
+      "facebook": "Facebook",
       "website": "Website",
       "services": {
         "title": "Services",
@@ -275,12 +276,10 @@
     "description": "Have a project in mind? Need a new website, web app, or a technical solution? I'd love to hear about it.",
     "channels": {
       "phone": {
-        "label": "Phone",
-        "value": "054-123-4567"
+        "label": "Phone"
       },
       "email": {
-        "label": "Email",
-        "value": "hello@clearweb.co.il"
+        "label": "Email"
       },
       "call": {
         "label": "Book a Call",
@@ -293,11 +292,16 @@
       "name": "Your Name *",
       "email": "Your Email *",
       "phone": "Phone Number",
+      "labelName": "Name",
+      "labelEmail": "Email",
+      "labelPhone": "Phone",
       "message": "Tell me about your project... *",
       "submit": "Send Message",
+      "sending": "Sending…",
       "note": "Your details are safe and will only be used to respond to your inquiry.",
       "subject": "New project inquiry from {name}",
-      "sent": "Thanks. Your email app is opening with this message."
+      "sent": "Thanks. I'll get back to you within one business day.",
+      "error": "The message didn't send. Try again, or email me directly."
     },
     "bar": {
       "location": "Based in Israel",

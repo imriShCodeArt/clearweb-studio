@@ -16,12 +16,14 @@ const routes = {
 export const site = {
   brandHref: routes.home,
   contactHref: routes.contact,
+  phone: "+972-2-500-10-66",
+  email: "info@clearweb.co.il",
   mainNav: [
     { id: "home", href: routes.home },
     { id: "work", href: routes.work },
     { id: "services", href: routes.services },
     { id: "about", href: routes.about },
-    { id: "contact", href: routes.contact},
+    { id: "contact", href: routes.contact },
   ],
   footerColumns: [
     {
@@ -58,8 +60,17 @@ export const site = {
     { id: "terms", href: routes.terms },
     { id: "accessibility", href: routes.accessibility },
   ],
-  social: [{ id: "linkedin" }, { id: "youtube" }, { id: "website" }],
+  social: [
+    { id: "linkedin", href: "https://www.linkedin.com/in/imrish/" },
+    { id: "facebook", href: "https://www.facebook.com/clearweb/" },
+    { id: "website" },
+  ],
 } as const;
+
+/** Local display for an Israeli number. The stored value stays international. */
+export function maskPhone(phone: string) {
+  return phone.replace(/^\+972-/, "0");
+}
 
 type ShellTranslator = ReturnType<typeof useTranslations<"shell">>;
 

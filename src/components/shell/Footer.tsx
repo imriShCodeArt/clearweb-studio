@@ -7,7 +7,7 @@ import ArrowForward from "@mui/icons-material/ArrowForward";
 import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import LinkOutlined from "@mui/icons-material/LinkOutlined";
-import YouTube from "@mui/icons-material/YouTube";
+import Facebook from "@mui/icons-material/Facebook";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -23,7 +23,7 @@ const hairline = "1px solid rgba(255, 255, 255, 0.1)";
 
 const socialIcons = {
   linkedin: LinkedIn,
-  youtube: YouTube,
+  facebook: Facebook,
   website: LinkOutlined,
 } as const;
 
@@ -82,9 +82,17 @@ export function Footer({
             tagline={footer.tagline}
             social={footer.social}
           />
-          <Box component="nav" aria-label={footer.navLabel} sx={{ display: "contents" }}>
+          <Box
+            component="nav"
+            aria-label={footer.navLabel}
+            sx={{ display: "contents" }}
+          >
             {footer.columns.map((column) => (
-              <FooterColumn key={column.id} title={column.title} links={column.links} />
+              <FooterColumn
+                key={column.id}
+                title={column.title}
+                links={column.links}
+              />
             ))}
           </Box>
           <FooterCall
@@ -126,7 +134,11 @@ export function Footer({
                 {index > 0 ? (
                   <Box
                     aria-hidden
-                    sx={{ width: "1px", height: 12, bgcolor: "rgba(255, 255, 255, 0.22)" }}
+                    sx={{
+                      width: "1px",
+                      height: 12,
+                      bgcolor: "rgba(255, 255, 255, 0.22)",
+                    }}
                   />
                 ) : null}
                 <FooterTextLink href={item.href}>{item.label}</FooterTextLink>
@@ -191,7 +203,14 @@ function FooterColumn({ title, links }: { title: string; links: SiteLink[] }) {
   return (
     <Box>
       <Text sx={{ mb: 1.75, fontWeight: 700, fontSize: 15 }}>{title}</Text>
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1.15 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: 1.15,
+        }}
+      >
         {links.map((link) => (
           <FooterTextLink key={link.id} href={link.href}>
             {link.label}
@@ -202,7 +221,13 @@ function FooterColumn({ title, links }: { title: string; links: SiteLink[] }) {
   );
 }
 
-function FooterTextLink({ href, children }: { href: string; children: string }) {
+function FooterTextLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: string;
+}) {
   return (
     <Link
       href={href}
@@ -260,7 +285,14 @@ function FooterCall({
       >
         <CalendarMonthOutlined sx={{ fontSize: 18 }} />
       </Box>
-      <Text sx={{ fontWeight: 800, fontSize: "1.15rem", lineHeight: 1.2, letterSpacing: "-0.02em" }}>
+      <Text
+        sx={{
+          fontWeight: 800,
+          fontSize: "1.15rem",
+          lineHeight: 1.2,
+          letterSpacing: "-0.02em",
+        }}
+      >
         {title}
       </Text>
       <Box />
