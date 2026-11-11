@@ -158,7 +158,7 @@
           "label": "Projects Delivered"
         },
         "clients": {
-          "value": "12",
+          "value": "30",
           "label": "Happy Clients"
         },
         "years": {
@@ -264,6 +264,44 @@
           "description": "Going live, checking every detail and staying on as it grows."
         }
       }
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact | Clear Web",
+    "metaDescription": "Tell me about your project and I'll get back to you within one business day.",
+    "eyebrow": "Get in touch",
+    "line1": "Let's Build",
+    "emphasis": "Something Together",
+    "description": "Have a project in mind? Need a new website, web app, or a technical solution? I'd love to hear about it.",
+    "channels": {
+      "phone": {
+        "label": "Phone",
+        "value": "054-123-4567"
+      },
+      "email": {
+        "label": "Email",
+        "value": "hello@clearweb.co.il"
+      },
+      "call": {
+        "label": "Book a Call",
+        "value": "Schedule a free intro call"
+      }
+    },
+    "form": {
+      "title": "Send a Message",
+      "description": "Tell me about your project, and I'll get back to you within one business day.",
+      "name": "Your Name *",
+      "email": "Your Email *",
+      "phone": "Phone Number",
+      "message": "Tell me about your project... *",
+      "submit": "Send Message",
+      "note": "Your details are safe and will only be used to respond to your inquiry.",
+      "subject": "New project inquiry from {name}",
+      "sent": "Thanks. Your email app is opening with this message."
+    },
+    "bar": {
+      "location": "Based in Israel",
+      "hours": "Sun – Thu, 09:00 – 17:00"
     }
   }
 }
