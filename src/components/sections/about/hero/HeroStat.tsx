@@ -12,12 +12,21 @@ type HeroStatProps = {
   label: string;
   divided: boolean;
   delay?: number;
+  duration: number;
 };
 
-export function HeroStat({ icon: Icon, value, label, divided, delay = 0 }: HeroStatProps) {
+export function HeroStat({
+  icon: Icon,
+  value,
+  label,
+  divided,
+  delay = 0,
+  duration,
+}: HeroStatProps) {
   return (
     <FadeIn
       component="li"
+      data-count-duration={duration}
       delay={delay}
       sx={{
         display: "flex",
@@ -62,6 +71,7 @@ export function HeroStat({ icon: Icon, value, label, divided, delay = 0 }: HeroS
           <ReelText
             text={value}
             variant="count"
+            duration={duration}
             delay={delay + homeMotion.fade.duration - 0.4}
           />
           <Text

@@ -2,7 +2,9 @@ import Box from "@mui/material/Box";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-import { CompactHeading, Text } from "@/components/typography";
+import { servicesMotion } from "@/animations/services";
+import { FadeIn } from "@/components/motion";
+import { Eyebrow, MarkedHeading, Text } from "@/components/typography";
 
 import { HeroContainer } from "./HeroContainer";
 
@@ -28,11 +30,14 @@ const imageProps = {
   },
 } as const;
 
+const line = { display: "block" } as const;
+
 export async function HeroSection() {
   const t = await getTranslations("services.hero");
+  const { hero } = servicesMotion;
 
   return (
-    <HeroContainer>
+    <HeroContainer id="services-hero">
       <Box
         sx={{
           display: { xs: "contents", sm: "flex", lg: "contents" },
@@ -43,18 +48,28 @@ export async function HeroSection() {
           minWidth: 0,
         }}
       >
-        <CompactHeading
-          eyebrow={t("eyebrow")}
-          line1={t("line1")}
-          line2={t("line2")}
-          level={1}
-          sx={{ gridArea: "title", maxWidth: { lg: 560 }, minWidth: 0, my: "auto" }}
-        />
-        <Box sx={{ gridArea: "copy", minWidth: 0, ...headingCopy }}>
-          <Text tone="secondary">{t("description")}</Text>
+        <Box sx={{ gridArea: "title", maxWidth: { lg: 560 }, minWidth: 0, my: "auto" }}>
+          <FadeIn delay={hero.eyebrow} from="top" sx={{ mb: 2 }}>
+            <Eyebrow variant="rule">{t("eyebrow")}</Eyebrow>
+          </FadeIn>
+          <MarkedHeading level={1} variant="compact">
+            <FadeIn component="span" delay={hero.line1} from="top" sx={line}>
+              <MarkedHeading.Line>{t("line1")}</MarkedHeading.Line>
+            </FadeIn>
+            <FadeIn component="span" delay={hero.line2} sx={line}>
+              <MarkedHeading.Line>
+                <MarkedHeading.Mark>{t("line2")}</MarkedHeading.Mark>
+              </MarkedHeading.Line>
+            </FadeIn>
+          </MarkedHeading>
         </Box>
+        <FadeIn delay={hero.description} sx={{ gridArea: "copy", minWidth: 0, ...headingCopy }}>
+          <Text tone="secondary">{t("description")}</Text>
+        </FadeIn>
       </Box>
-      <Box
+      <FadeIn
+        delay={hero.art}
+        from="bottom"
         sx={{
           gridArea: "art",
           minWidth: 0,
@@ -67,9 +82,9 @@ export async function HeroSection() {
         <Image
           alt=""
           {...imageProps}
-          src="/services/services-hero-labtop-screens.png"
+          src="/services/hero/services-hero-labtop-screens.png"
         />
-      </Box>
+      </FadeIn>
     </HeroContainer>
   );
 }

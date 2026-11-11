@@ -1,9 +1,13 @@
-import Box from "@mui/material/Box";
 import Image from "next/image";
+
+import { aboutMotion } from "@/animations/about";
+import { FadeIn } from "@/components/motion";
 
 export function HeroPortrait() {
   return (
-    <Box
+    <FadeIn
+      delay={aboutMotion.hero.portrait}
+      from="bottom"
       sx={{
         position: "relative",
         height: 340,
@@ -20,13 +24,13 @@ export function HeroPortrait() {
       }}
     >
       <Image
-        src="/about/about-hero-bg.png"
+        src="/about/hero/about-hero-bg.png"
         alt=""
         fill
         priority
         sizes="(max-width: 900px) 100vw, 560px"
         style={{'overflow':'visible'}}
       />
-    </Box>
+    </FadeIn>
   );
 }

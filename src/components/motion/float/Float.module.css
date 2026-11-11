@@ -1,0 +1,256 @@
+/* ---------------------------------------------
+   Root container
+--------------------------------------------- */
+
+.root {
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 156px;
+
+  perspective: var(--float-perspective);
+  isolation: isolate;
+}
+
+/* ---------------------------------------------
+   Primary floating object
+--------------------------------------------- */
+
+.figure {
+  position: relative;
+  display: block;
+
+  height: min(100%, var(--float-natural-height));
+  width: auto;
+  max-width: 100%;
+
+  aspect-ratio: var(--float-ratio);
+
+  transform-style: preserve-3d;
+
+  animation-duration: var(--float-duration);
+  animation-delay: var(--float-delay);
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.motionA {
+  animation-name: floatA;
+}
+
+.motionB {
+  animation-name: floatB;
+}
+
+/* ---------------------------------------------
+   Independent secondary movement
+--------------------------------------------- */
+
+.sway {
+  position: relative;
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+
+  animation-name: sway;
+  animation-duration: var(--sway-duration);
+  animation-delay: var(--sway-delay);
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+/* ---------------------------------------------
+   3D extrusion layers
+--------------------------------------------- */
+
+.edge {
+  position: absolute;
+  inset: 0;
+  display: block;
+
+  background-color: var(--edge-color);
+
+  transform: translate3d(0, 0, var(--edge-depth));
+
+  mask-image: var(--float-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  -webkit-mask-image: var(--float-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+
+  pointer-events: none;
+}
+
+/* ---------------------------------------------
+   Front-facing image
+--------------------------------------------- */
+
+.image {
+  position: absolute;
+  inset: 0;
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transform: translateZ(1px);
+
+  backface-visibility: hidden;
+}
+
+/* ---------------------------------------------
+   Ground shadow
+--------------------------------------------- */
+
+.shadow {
+  position: absolute;
+
+  left: 50%;
+  bottom: 8%;
+
+  width: 42%;
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 72%
+  );
+
+  pointer-events: none;
+
+  animation-name: floatShadow;
+  animation-duration: var(--float-duration);
+  animation-delay: var(--float-delay);
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* ---------------------------------------------
+   Primary floating animation A
+--------------------------------------------- */
+
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translate3d(
+        calc(var(--float-x) * -0.35),
+        calc(var(--float-y) * -0.25),
+        calc(var(--float-z) * -1)
+      )
+      rotateX(calc(var(--float-rx) * -0.35))
+      rotateY(calc(var(--float-ry) * -0.35))
+      rotateZ(calc(var(--float-rz) * -0.35));
+  }
+
+  50% {
+    transform: translate3d(var(--float-x), var(--float-y), var(--float-z))
+      rotateX(var(--float-rx)) rotateY(var(--float-ry)) rotateZ(var(--float-rz));
+  }
+}
+
+/* ---------------------------------------------
+   Primary floating animation B
+--------------------------------------------- */
+
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translate3d(
+        calc(var(--float-x) * -0.2),
+        calc(var(--float-y) * -0.35),
+        calc(var(--float-z) * -0.2)
+      )
+      rotateX(calc(var(--float-rx) * -0.25))
+      rotateY(calc(var(--float-ry) * -0.4))
+      rotateZ(calc(var(--float-rz) * -0.25));
+  }
+
+  50% {
+    transform: translate3d(var(--float-x), var(--float-y), var(--float-z))
+      rotateX(var(--float-rx)) rotateY(var(--float-ry)) rotateZ(var(--float-rz));
+  }
+}
+
+/* ---------------------------------------------
+   Independent secondary sway
+--------------------------------------------- */
+
+@keyframes sway {
+  0% {
+    transform: rotateZ(calc(-1 * var(--sway-angle))) translateY(0);
+  }
+
+  100% {
+    transform: rotateZ(var(--sway-angle)) translateY(0.4px);
+  }
+}
+
+/* ---------------------------------------------
+   Animated shadow
+--------------------------------------------- */
+
+@keyframes floatShadow {
+  0%,
+  100% {
+    opacity: 0.36;
+
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+
+    transform: translateX(-50%) scale(0.94);
+  }
+}
+
+/* ---------------------------------------------
+   Responsive sizing
+--------------------------------------------- */
+
+@media (min-width: 600px) {
+  .root {
+    height: 128px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .root {
+    height: 148px;
+  }
+}
+
+/* ---------------------------------------------
+   Accessibility: reduced motion
+--------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .figure,
+  .sway,
+  .shadow {
+    animation: none;
+  }
+
+  .shadow {
+    opacity: 0.35;
+    transform: translateX(-50%);
+  }
+}

@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Image from "next/image";
 
+import { FadeIn, Float } from "@/components/motion";
 import { Card } from "@/components/surfaces";
 import { Text } from "@/components/typography";
 
@@ -12,56 +12,51 @@ type ApproachCardProps = {
     width: number;
     height: number;
   };
+  delay?: number;
+  index?: number;
 };
 
-export function ApproachCard({ title, description, image }: ApproachCardProps) {
+export function ApproachCard({
+  title,
+  description,
+  image,
+  delay = 0,
+  index = 0,
+}: ApproachCardProps) {
   return (
-    <Card
+    <FadeIn
       component="li"
-      sx={{
-        alignItems: "center",
-        gap: 1.75,
-        px: { xs: 2, md: 2.25 },
-        py: { xs: 2.5, md: 3 },
-        textAlign: "center",
-      }}
+      delay={delay}
+      from="bottom"
+      sx={{ display: "flex", minWidth: 0, transformStyle: "preserve-3d" }}
     >
-      <Box
+      <Card
         sx={{
-          display: "grid",
-          placeItems: "center",
-          width: "100%",
-          height: { xs: 156, sm: 128, lg: 148 },
+          flex: 1,
+          alignItems: "center",
+          gap: 1.75,
+          transformStyle: "preserve-3d",
+          px: { xs: 2, md: 2.25 },
+          py: { xs: 2.5, md: 3 },
+          textAlign: "center",
         }}
       >
-        <Image
-          alt=""
-          src={image.src}
-          width={image.width}
-          height={image.height}
-          sizes="(max-width: 599px) 70vw, 220px"
-          style={{
-            width: "auto",
-            maxWidth: "100%",
-            maxHeight: "100%",
-            height: "auto",
-          }}
-        />
-      </Box>
-      <Box>
-        <Text
-          sx={{
-            fontWeight: 800,
-            fontSize: { xs: "1.15rem", md: "1.25rem" },
-            lineHeight: 1.2,
-          }}
-        >
-          {title}
-        </Text>
-        <Text tone="secondary" variant="body2" sx={{ mt: 0.75 }}>
-          {description}
-        </Text>
-      </Box>
-    </Card>
+        <Float motion={index % 2 == 0 ? "a" : "b"} image={image} />
+        <Box>
+          <Text
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: "1.15rem", md: "1.25rem" },
+              lineHeight: 1.2,
+            }}
+          >
+            {title}
+          </Text>
+          <Text tone="secondary" variant="body2" sx={{ mt: 0.75 }}>
+            {description}
+          </Text>
+        </Box>
+      </Card>
+    </FadeIn>
   );
 }

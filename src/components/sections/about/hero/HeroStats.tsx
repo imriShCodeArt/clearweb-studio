@@ -1,11 +1,8 @@
-import { homeMotion } from "@/animations/home";
+import { heroStatPlan } from "@/animations/about";
 import { Columns } from "@/components/layout";
 
 import { HeroStat } from "./HeroStat";
 import type { HeroStatIcon, HeroStatId } from "./stats";
-
-const countDuration = 1.6;
-const turn = homeMotion.fade.duration + countDuration;
 
 export type HeroStatItem = {
   id: HeroStatId;
@@ -14,17 +11,31 @@ export type HeroStatItem = {
   label: string;
 };
 
+function amountOf(value: string) {
+  const amount = Number.parseFloat(value);
+  return Number.isFinite(amount) ? amount : 0;
+}
+
 export function HeroStats({ stats }: { stats: HeroStatItem[] }) {
+  const plan = heroStatPlan(stats.map((stat) => amountOf(stat.value)));
+  const items = stats.map((stat, index) => ({
+    stat,
+    index,
+    duration: plan.items[index]?.duration ?? 0,
+    delay: plan.items[index]?.delay ?? 0,
+  }));
+
   return (
     <Columns component="ul" columns={{ sm: 3 }} gap={{ xs: 2, sm: 0 }}>
-      {stats.map((stat, index) => (
+      {items.map(({ stat, index, duration, delay }) => (
         <HeroStat
           key={stat.id}
           icon={stat.icon}
           value={stat.value}
           label={stat.label}
           divided={index > 0}
-          delay={index * turn}
+          delay={delay}
+          duration={duration}
         />
       ))}
     </Columns>

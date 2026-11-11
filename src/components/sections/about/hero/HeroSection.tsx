@@ -12,10 +12,7 @@ export async function HeroSection() {
   const t = await getTranslations("about.hero");
 
   return (
-    <Section
-      label={t("eyebrow")}
-      spacing="none"
-    >
+    <Section id="about-hero" label={t("eyebrow")} spacing="none">
       <Columns
         alignItems={{ lg: "end" }}
         columnGap={{ lg: 4 }}

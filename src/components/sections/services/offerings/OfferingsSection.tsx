@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { servicesMotion } from "@/animations/services";
 import { Columns, Section } from "@/components/layout";
 
 import { OfferingCard } from "./OfferingCard";
@@ -9,11 +10,12 @@ export async function OfferingsSection() {
   const t = await getTranslations("services.offerings");
 
   return (
-    <Section label={t("label")} spacing="compact">
+    <Section id="services-offerings" label={t("label")} spacing="compact">
       <Columns component="ul" columns={{ sm: 2, lg: 3 }} gap={{ xs: 2, md: 2.5 }}>
-        {offerings.map((offering) => (
+        {offerings.map((offering, index) => (
           <OfferingCard
             key={offering.id}
+            delay={index * servicesMotion.stagger}
             index={offering.index}
             title={t(`${offering.id}.title`)}
             description={t(`${offering.id}.description`)}

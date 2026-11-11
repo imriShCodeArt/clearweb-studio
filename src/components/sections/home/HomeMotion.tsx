@@ -22,10 +22,9 @@ function targets(scope: ParentNode, beat: string) {
 
 export function HomeMotion({ children }: HomeMotionProps) {
   const root = useRef<HTMLDivElement>(null);
-  const safeRef = useRef<((callback: () => void) => () => void) | null>(null);
 
-  const { contextSafe } = useGSAP(
-    () => {
+  useGSAP(
+    (_context, contextSafe) => {
       const scope = root.current;
       if (!scope) return;
 
@@ -196,14 +195,9 @@ export function HomeMotion({ children }: HomeMotionProps) {
           }
         });
         motion.add(sequence.stack, () => {
-          for (const { list, items, stagger, cascade } of lists) {
-            if (cascade) {
-              playReveal(items, list, stagger, 0, () => markCascade(list));
-              continue;
-            }
-
+          for (const { items } of lists) {
             for (const item of items) {
-              playReveal([item], item, 0, 0, () => afterCascade(item));
+              playReveal([item], item);
             }
           }
         });
@@ -245,15 +239,12 @@ export function HomeMotion({ children }: HomeMotionProps) {
         });
       };
 
-      const start = safeRef.current;
-      if (start) afterScrollSettles(start(mountScrollTriggers));
+      if (contextSafe) afterScrollSettles(contextSafe(mountScrollTriggers));
 
       return () => resetHeroGate();
     },
     { scope: root },
   );
-
-  safeRef.current = contextSafe;
 
   return <div ref={root}>{children}</div>;
 }

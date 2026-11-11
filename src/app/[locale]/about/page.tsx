@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { ApproachSection, DriveSection, HeroSection } from "@/components/sections/about";
+import { AboutMotion } from "@/components/sections/about/AboutMotion";
 import { AboutBackdrop } from "@/components/sections/about/AboutBackdrop";
 import { routing } from "@/i18n/routing";
 
@@ -29,11 +30,13 @@ export default async function AboutPage({
       }}
     >
       <AboutBackdrop />
-      <Box sx={{ position: "relative", zIndex: 1 }}>
-        <HeroSection />
-        <ApproachSection />
-        <DriveSection />
-      </Box>
+      <AboutMotion>
+        <Box sx={{ position: "relative", zIndex: 1 }}>
+          <HeroSection />
+          <ApproachSection />
+          <DriveSection />
+        </Box>
+      </AboutMotion>
     </Box>
   );
 }

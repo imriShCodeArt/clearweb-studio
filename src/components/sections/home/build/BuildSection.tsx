@@ -15,7 +15,7 @@ function BuildIntro({ children }: { children: ReactNode }) {
 }
 
 function BuildSummary({ children }: { children: ReactNode }) {
-  return <Reveal sx={{ maxWidth: 300, flexShrink: 0 }}>{children}</Reveal>;
+  return <Reveal sx={{ maxWidth: 300, flexShrink: 0, mt:{xs:2, md: 0} }}>{children}</Reveal>;
 }
 
 export async function BuildSection() {

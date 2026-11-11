@@ -23,11 +23,6 @@ type ReelTextProps = {
   variant?: ReelTextVariant;
 };
 
-function logarithmicEase(progress: number) {
-  const base = 10;
-  return Math.log(1 + progress * (base - 1)) / Math.log(base);
-}
-
 function parseCount(text: string) {
   const match = /^(\d+(?:\.\d+)?)(.*)$/.exec(text);
   if (!match) return null;
@@ -179,7 +174,7 @@ function CountReel({
         value: parsed.target,
         duration,
         delay,
-        ease: logarithmicEase,
+        ease: "none",
         onUpdate() {
           render(proxy.value);
         },
@@ -241,10 +236,9 @@ function Reel({
 }) {
   const root = useRef<HTMLSpanElement>(null);
   const chars = graphemes(text);
-  const safeRef = useRef<((callback: () => void) => () => void) | null>(null);
 
-  const { contextSafe } = useGSAP(
-    () => {
+  useGSAP(
+    (_context, contextSafe) => {
       const scope = root.current;
       if (!scope) return;
 
@@ -253,7 +247,6 @@ function Reel({
       ).matches;
       if (reduceMotion) return;
 
-      const track = safeRef.current;
       const spin = () => {
         const strips = gsap.utils.toArray<HTMLElement>("[data-reel]", scope);
 
@@ -278,7 +271,7 @@ function Reel({
           );
         });
       };
-      const trackedSpin = track ? track(spin) : spin;
+      const trackedSpin = contextSafe ? contextSafe(spin) : spin;
 
       const start = () => {
         if (document.fonts?.ready) {
@@ -295,8 +288,6 @@ function Reel({
     },
     { scope: root, dependencies: [text, delay, duration, stagger] },
   );
-
-  safeRef.current = contextSafe;
 
   const words: { chars: string[]; start: number }[] = [];
   chars.forEach((char, index) => {

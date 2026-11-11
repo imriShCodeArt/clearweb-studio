@@ -84,7 +84,7 @@ export function Flip({ sx, ...props }: BoxProps) {
       timeline.to(element, {
         rotationX: FLIP.overshoot,
         duration: FLIP.unfoldDuration,
-        ease: "power3.out",
+        ease: "sine.in",
       });
 
       // 2. Swing back past center.

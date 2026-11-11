@@ -56,7 +56,7 @@ const hinge = {
 const fade = {
   duration: 0.5,
   ease: "power2.out",
-  distance: 28,
+  distance: 58,
 };
 
 const sequence = {
@@ -106,8 +106,12 @@ const actionHinge: HingeTransition = {
   rest: 0.28,
 };
 
-/** Hero entrance. `at` is seconds from page load. */
-const hero: {
+function cueEnd(cue: Cue) {
+  const span = cue.hinge ? hingeSpan(hinge, cue.hinge) : cue.duration ?? 0;
+  return cue.at + span;
+}
+
+type HeroCues = {
   panel: PlayedCue;
   eyebrow: Cue;
   line1: Cue;
@@ -115,7 +119,11 @@ const hero: {
   description: HingeCue;
   start: HingeCue;
   process: HingeCue;
-} = {
+  screens: Cue & { duration: number };
+};
+
+/** Hero entrance. `at` is seconds from page load. */
+const hero: HeroCues = {
   panel: {
     beat: beats.heroPanel,
     at: 0.2,
@@ -128,6 +136,10 @@ const hero: {
   description: { at: 1.95, hinge: descriptionHinge },
   start: { at: 2.55, hinge: actionHinge },
   process: { at: 2.95, hinge: actionHinge },
+  screens: {
+    at: 3.85,
+    duration: 2,
+  },
 };
 
 export const homeMotion = {
@@ -144,12 +156,7 @@ export const homeMotion = {
 
 /** Seconds from load until the last hero cue has stopped moving. */
 export function heroSettledAt() {
-  return Math.max(
-    ...Object.values(homeMotion.hero).map((cue) => {
-      const span = cue.hinge ? hingeSpan(hinge, cue.hinge) : cue.duration ?? 0;
-      return cue.at + span;
-    }),
-  );
+  return Math.max(...Object.values(homeMotion.hero).map(cueEnd));
 }
 
 export const motionStartCss = `

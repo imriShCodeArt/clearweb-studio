@@ -26,9 +26,15 @@ function HeroGlow() {
   );
 }
 
-export function HeroContainer({ children }: { children: ReactNode }) {
+export function HeroContainer({
+  id,
+  children,
+}: {
+  id?: string;
+  children: ReactNode;
+}) {
   return (
-    <Section spacing="compact" sx={{ position: "relative", overflow: "hidden" }}>
+    <Section id={id} spacing="compact" sx={{ position: "relative", overflow: "hidden" }}>
       <HeroGlow />
       <Columns
         alignItems="center"

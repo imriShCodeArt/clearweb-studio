@@ -2,6 +2,7 @@ import type { ElementType } from "react";
 import Box from "@mui/material/Box";
 import type { SvgIconProps } from "@mui/material/SvgIcon";
 
+import { FadeIn } from "@/components/motion";
 import { Text } from "@/components/typography";
 
 type DriveValueProps = {
@@ -9,14 +10,23 @@ type DriveValueProps = {
   title: string;
   description: string;
   divided: boolean;
+  delay?: number;
 };
 
 const divider = "1px solid rgba(255, 255, 255, 0.16)";
 
-export function DriveValue({ Icon, title, description, divided }: DriveValueProps) {
+export function DriveValue({
+  Icon,
+  title,
+  description,
+  divided,
+  delay = 0,
+}: DriveValueProps) {
   return (
-    <Box
+    <FadeIn
       component="li"
+      delay={delay}
+      from="bottom"
       sx={{
         display: "flex",
         alignItems: "center",
@@ -50,6 +60,6 @@ export function DriveValue({ Icon, title, description, divided }: DriveValueProp
           {description}
         </Text>
       </Box>
-    </Box>
+    </FadeIn>
   );
 }
