@@ -5,14 +5,24 @@ const beamFrom = "-100%";
 const beamTo = `${(10000 / beamLength).toFixed(2)}%`;
 const beamFromX = `translateX(${beamFrom})`;
 const beamToX = `translateX(${beamTo})`;
+// translate3d is not mirrored by the RTL stylesheet, so a parent
+// scaleX(-1) can flip the arrow and the beam together.
+const beamFromX3d = "translate3d(-140%, 0, 0)";
+const beamToX3d = `translate3d(${beamTo}, 0, 0)`;
 const beamFromY = `translateY(${beamFrom})`;
 const beamToY = `translateY(${beamTo})`;
 
-export function beamFrames(order: number, total: number, axis: "x" | "y") {
+export function beamFrames(
+  order: number,
+  total: number,
+  axis: "x" | "y",
+  preserveDirection = false,
+) {
   const start = (order / total) * 100;
   const end = ((order + 1) / total) * 100;
-  const from = axis === "x" ? beamFromX : beamFromY;
-  const to = axis === "x" ? beamToX : beamToY;
+  const from =
+    axis === "y" ? beamFromY : preserveDirection ? beamFromX3d : beamFromX;
+  const to = axis === "y" ? beamToY : preserveDirection ? beamToX3d : beamToX;
   const frames: Record<string, { transform: string }> = {};
   const set = (percent: number, transform: string) => {
     frames[`${Number(percent.toFixed(2))}%`] = { transform };

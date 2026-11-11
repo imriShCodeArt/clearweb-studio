@@ -12,6 +12,8 @@ type ProcessStepProps = {
   title: string;
   description: string;
   showArrow: boolean;
+  rowStart?: boolean;
+  order?: number;
 };
 
 export function ProcessStep({
@@ -20,20 +22,24 @@ export function ProcessStep({
   title,
   description,
   showArrow,
+  rowStart = false,
+  order = 0,
 }: ProcessStepProps) {
   return (
     <Reveal
       component="li"
       sx={{
+        position: "relative",
         display: "flex",
         flex: { lg: 1 },
         flexDirection: { xs: "column", lg: "row" },
         alignItems: { xs: "center", lg: "stretch" },
+        justifyContent: { xs: "center", lg: "flex-start" },
         width: { xs: "100%", lg: "auto" },
         minWidth: 0,
       }}
     >
-      {showArrow ? <Arrow /> : null}
+      {showArrow ? <Arrow rowStart={rowStart} order={order} /> : null}
       <Box
         sx={{
           display: "flex",
@@ -41,8 +47,8 @@ export function ProcessStep({
           flexDirection: "column",
           alignItems: { xs: "center", lg: "flex-start" },
           gap: 1.5,
-          width: { xs: "100%", lg: "auto" },
-          maxWidth: { xs: 280, lg: "none" },
+          width: { xs: "100%", sm: "auto" },
+          maxWidth: { xs: 280, sm: 220, lg: "none" },
           minWidth: 0,
           textAlign: { xs: "center", lg: "start" },
         }}
