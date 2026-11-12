@@ -6,6 +6,55 @@ import { Columns, Section } from "@/components/layout";
 const glow =
   "radial-gradient(ellipse at center, rgba(247, 207, 0, 0.42) 0%, rgba(247, 207, 0, 0.14) 42%, transparent 72%)";
 
+function HeroStones() {
+  return (
+    <Box
+      aria-hidden
+      style={{
+        position: "absolute",
+        inset: 0,
+      }}
+      sx={{
+        zIndex: 0,
+        backgroundImage: "url(/services/hero/services-hero-bg-stones.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: { xs: "auto 72%", sm: "auto 90%", lg: "auto 100%" },
+        pointerEvents: "none",
+        opacity: 0.5,
+        backgroundPosition: { xs: "0% 100%", sm: "-25% bottom" },
+      }}
+    />
+  );
+}
+
+function HeroStonesAccent() {
+  return (
+    <Box
+      aria-hidden
+      style={{
+        right: '-5%',
+        backgroundPosition: "center",
+        transform: "scaleX(-1)",
+      }}
+      sx={{
+        position: "absolute",
+        zIndex: 0,
+        // top: { xs: -48, md: -30 },
+        bottom: { xs: "48%", sm: "40%" },
+        width: { xs: "42%", sm: "30%" },
+        maxWidth: 300,
+        minWidth: { xs: 140, sm: 180 },
+        aspectRatio: "1",
+        backgroundImage: "url(/services/hero/services-hero-bg-stones.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain",
+        pointerEvents: "none",
+        opacity: 0.5,
+      }}
+    />
+  );
+}
+
 function HeroGlow() {
   return (
     <Box
@@ -34,7 +83,18 @@ export function HeroContainer({
   children: ReactNode;
 }) {
   return (
-    <Section id={id} spacing="compact" sx={{ position: "relative", overflow: "hidden" }}>
+    <Section
+      id={id}
+      spacing="compact"
+      fullWidth
+      contained
+      sx={{
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <HeroStones />
+      <HeroStonesAccent />
       <HeroGlow />
       <Columns
         alignItems="center"

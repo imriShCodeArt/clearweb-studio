@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Stack from "@mui/material/Stack";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 import { Button, Link } from "@/components/actions";
 import { Intro } from "@/components/motion";
@@ -38,26 +39,73 @@ export function AppBar({
   onOpenMenu,
 }: AppBarProps) {
   const pathname = usePathname();
+  const isScrolled = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 8,
+  });
 
   return (
     <Intro
       component={MuiAppBar}
       sx={{
         position: "sticky",
+        top: isScrolled ? { xs: 8, md: 12 } : 0,
+        width: "auto",
+        mx: isScrolled ? { xs: 1, md: 2 } : 0,
         color: "transparent",
-        bgcolor: "transparent",
+        bgcolor: isScrolled ? "rgba(11, 12, 13, 0.82)" : "transparent",
         backgroundImage: "none",
-        boxShadow: "none",
+        boxShadow: isScrolled
+          ? "0 12px 36px rgba(0, 0, 0, 0.3)"
+          : "none",
         border: "none",
+        borderRadius: isScrolled ? { xs: 2, md: 2.5 } : 0,
+        backdropFilter: isScrolled ? "blur(18px)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(18px)" : "none",
+        transition: (theme) =>
+          theme.transitions.create(
+            [
+              "top",
+              "margin",
+              "background-color",
+              "box-shadow",
+              "border-radius",
+              "backdrop-filter",
+            ],
+            {
+              duration: theme.transitions.duration.shorter,
+              easing: theme.transitions.easing.easeOut,
+            },
+          ),
+        "&::after": {
+          content: '""',
+          position: "absolute",
+          inset: 0,
+          border: "1px solid",
+          borderColor: isScrolled ? "divider" : "transparent",
+          borderRadius: "inherit",
+          pointerEvents: "none",
+          transition: (theme) =>
+            theme.transitions.create("border-color", {
+              duration: theme.transitions.duration.shorter,
+            }),
+        },
       }}
     >
       <Toolbar
         sx={{
           position: "relative",
-          minHeight: { xs: 72, md: 84 },
+          minHeight: isScrolled
+            ? { xs: 54, md: 61 }
+            : { xs: 72, md: 84 },
           px: { xs: 2, md: 4 },
           gap: 2,
           justifyContent: "space-between",
+          transition: (theme) =>
+            theme.transitions.create("min-height", {
+              duration: theme.transitions.duration.shorter,
+              easing: theme.transitions.easing.easeOut,
+            }),
         }}
       >
         <BrandLockup brand={brand} href={brandHref} />

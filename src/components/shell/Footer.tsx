@@ -51,6 +51,8 @@ export function Footer({
         bgcolor: "background.default",
         pt: { xs: 5, md: 7 },
         pb: { xs: 3, md: 4 },
+        borderTop:'3px rgba(73, 73, 75, 0.76)',
+        borderTopStyle:'solid'
       }}
     >
       <Box
@@ -64,6 +66,16 @@ export function Footer({
           backgroundSize: "cover",
           pointerEvents: "none",
           '[dir="rtl"] &': { transform: "scaleX(-1)" },
+        }}
+      />
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          zIndex: 0,
+          inset: 0,
+          bgcolor: "rgba(33, 33, 35, 0.76)",
+          pointerEvents: "none",
         }}
       />
       <Container sx={{ position: "relative", zIndex: 1 }}>
