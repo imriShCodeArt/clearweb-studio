@@ -42,9 +42,9 @@ export function HeroContainer({ children }: { children: ReactNode }) {
         zIndex: 0,
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
-        alignItems: { xs: "stretch", md: "center" },
+        alignItems: "stretch",
         overflow: "hidden",
-        mt: { xs: "-72px", md: "-90px" },
+        mt: { xs: "-72px", md: "-84px" },
         minHeight: { xs: "900px", sm: "100svh", md: "72svh" },
         backgroundColor: "#0B0C0D",
         backgroundImage: {
