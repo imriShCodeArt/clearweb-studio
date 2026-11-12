@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import { FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 import { Card } from "@/components/surfaces";
 
 import { OfferingCopy } from "./OfferingCopy";
@@ -15,7 +15,6 @@ type OfferingCardProps = {
   image: OfferingPicture;
   tags: OfferingTag[];
   wide?: boolean;
-  delay?: number;
 };
 
 export function OfferingCard({
@@ -25,13 +24,11 @@ export function OfferingCard({
   image,
   tags,
   wide = false,
-  delay = 0,
 }: OfferingCardProps) {
   return (
-    <FadeIn
+    <Motion
       component="li"
-      delay={delay}
-      from="bottom"
+      motion="item"
       sx={{
         display: "flex",
         minWidth: 0,
@@ -62,6 +59,6 @@ export function OfferingCard({
         </Box>
         <OfferingTags tags={tags} />
       </Card>
-    </FadeIn>
+    </Motion>
   );
 }

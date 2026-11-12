@@ -3,10 +3,10 @@ import LinkOutlined from "@mui/icons-material/LinkOutlined";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import ScheduleOutlined from "@mui/icons-material/ScheduleOutlined";
 import Facebook from "@mui/icons-material/Facebook";
-import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { getTranslations } from "next-intl/server";
 
+import { Motion } from "@/components/motion";
 import { BrandLockup } from "@/components/shell/BrandLockup";
 import { site } from "@/config/site";
 
@@ -23,7 +23,8 @@ export async function ContactBar() {
   const shell = await getTranslations("shell");
 
   return (
-    <Box
+    <Motion
+      motion="bar"
       sx={{
         position: "relative",
         zIndex: 1,
@@ -39,8 +40,11 @@ export async function ContactBar() {
         backdropFilter: "blur(10px)",
       }}
     >
-      <BrandLockup brand={shell("brand")} href={site.brandHref} />
-      <Box
+      <Motion motion="bar-item">
+        <BrandLockup brand={shell("brand")} href={site.brandHref} />
+      </Motion>
+      <Motion
+        motion="bar-item"
         sx={{
           display: "flex",
           flexWrap: "wrap",
@@ -56,8 +60,8 @@ export async function ContactBar() {
           icon={<ScheduleOutlined sx={{ fontSize: 18 }} />}
           text={t("bar.hours")}
         />
-      </Box>
-      <Box sx={{ display: "flex", gap: 1 }}>
+      </Motion>
+      <Motion motion="bar-item" sx={{ display: "flex", gap: 1 }}>
         {site.social.map((item) => {
           const Icon = socialIcons[item.id];
           return (
@@ -76,7 +80,7 @@ export async function ContactBar() {
             </IconButton>
           );
         })}
-      </Box>
-    </Box>
+      </Motion>
+    </Motion>
   );
 }

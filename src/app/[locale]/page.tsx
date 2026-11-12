@@ -8,9 +8,9 @@ import {
   ContactSection,
   FeaturesSection,
   HeroSection,
-  HomeMotion,
   ProcessSection,
 } from "@/components/sections/home";
+import { MotionPage } from "@/components/motion";
 import { routing } from "@/i18n/routing";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
@@ -23,13 +23,13 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale);
 
   return (
-    <HomeMotion key={locale}>
+    <MotionPage>
       <HeroSection />
       <ProcessSection />
       <FeaturesSection />
       <BuildSection />
       <AboutSection />
       <ContactSection />
-    </HomeMotion>
+    </MotionPage>
   );
 }

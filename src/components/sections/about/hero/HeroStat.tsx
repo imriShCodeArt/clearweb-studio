@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 
-import { homeMotion } from "@/animations/home";
-import { FadeIn, ReelText } from "@/components/motion";
+import { Motion, ReelText } from "@/components/motion";
 import { Text } from "@/components/typography";
 
 import type { HeroStatIcon } from "./stats";
@@ -11,7 +10,6 @@ type HeroStatProps = {
   value: string;
   label: string;
   divided: boolean;
-  delay?: number;
   duration: number;
 };
 
@@ -20,14 +18,12 @@ export function HeroStat({
   value,
   label,
   divided,
-  delay = 0,
   duration,
 }: HeroStatProps) {
   return (
-    <FadeIn
+    <Motion
       component="li"
-      data-count-duration={duration}
-      delay={delay}
+      motion="stat"
       sx={{
         display: "flex",
         alignItems: "center",
@@ -72,7 +68,7 @@ export function HeroStat({
             text={value}
             variant="count"
             duration={duration}
-            delay={delay + homeMotion.fade.duration - 0.4}
+            motion="count"
           />
           <Text
             variant="body2"
@@ -86,6 +82,6 @@ export function HeroStat({
           {label}
         </Text>
       </Box>
-    </FadeIn>
+    </Motion>
   );
 }

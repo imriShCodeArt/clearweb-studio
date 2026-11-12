@@ -1,9 +1,12 @@
 import Box from "@mui/material/Box";
 
+import { Motion } from "@/components/motion";
+
 export function ContactBackdrop() {
   return (
-    <Box
+    <Motion
       aria-hidden
+      motion="backdrop"
       sx={{
         position: "absolute",
         inset: 0,
@@ -31,6 +34,6 @@ export function ContactBackdrop() {
             "rgba(11, 12, 13, 0.55) 100%)",
         }}
       />
-    </Box>
+    </Motion>
   );
 }

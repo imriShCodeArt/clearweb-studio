@@ -1,12 +1,4 @@
-"use client";
-
-import { useRef } from "react";
 import Box from "@mui/material/Box";
-
-import { whenHeroPlays } from "@/animations/heroGate";
-import { beats, homeMotion } from "@/animations/home";
-import { whenSequenced } from "@/animations/sequences";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const HEBREW = "אבגדהוזחטיכלמנסעפצקרשת";
 const LATIN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -19,8 +11,8 @@ export const reelCountDuration = 1.6;
 
 type ReelTextProps = {
   text: string;
-  delay?: number;
   duration?: number;
+  motion?: string;
   stagger?: number;
   variant?: ReelTextVariant;
 };
@@ -127,8 +119,6 @@ function LetterReel({ char, index }: { char: string; index: number }) {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
-            opacity: 0,
-            transform: "translateY(calc(-100% + 1lh))",
           }}
         >
           {glyphs.map((glyph, glyphIndex) => (
@@ -144,76 +134,25 @@ function LetterReel({ char, index }: { char: string; index: number }) {
 
 function CountReel({
   text,
-  delay,
   duration,
+  motion,
 }: {
   text: string;
-  delay: number;
   duration: number;
+  motion?: string;
 }) {
-  const root = useRef<HTMLSpanElement>(null);
   const parsed = parseCount(text);
-
-  useGSAP(
-    () => {
-      const scope = root.current;
-      const node = scope?.querySelector<HTMLElement>("[data-count]");
-      if (!scope || !node || !parsed) return;
-
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (reduceMotion) return;
-
-      const places = parsed.target.toString().split(".")[1]?.length ?? 0;
-      const render = (value: number) => {
-        const shown = places === 0 ? Math.round(value) : value.toFixed(places);
-        node.textContent = `${shown}${parsed.suffix}`;
-      };
-      const proxy = { value: 0 };
-      render(0);
-      const count = gsap.to(proxy, {
-        value: parsed.target,
-        duration,
-        delay,
-        ease: "none",
-        paused: true,
-        onUpdate() {
-          render(proxy.value);
-        },
-      });
-
-      const play = () => count.play();
-
-      if (scope.closest("#hero")) {
-        whenHeroPlays(scope, play);
-        return;
-      }
-
-      if (
-        whenSequenced(scope, (mode) => {
-          if (mode === "item") count.delay(0);
-          play();
-        })
-      ) {
-        return;
-      }
-
-      ScrollTrigger.create({
-        trigger: scope.closest(`[data-animate="${beats.fade}"]`) ?? scope,
-        start: homeMotion.reveal.start,
-        once: homeMotion.reveal.once,
-        onEnter: play,
-      });
-    },
-    { scope: root, dependencies: [text, delay, duration] },
-  );
+  const places = parsed?.target.toString().split(".")[1]?.length ?? 0;
 
   return (
     <Box
       component="span"
-      ref={root}
       dir="ltr"
+      data-motion={motion}
+      data-count-value={parsed?.target}
+      data-count-suffix={parsed?.suffix}
+      data-count-places={places}
+      data-count-duration={duration}
       sx={{
         display: "inline-grid",
         verticalAlign: "top",
@@ -227,7 +166,7 @@ function CountReel({
         {text}
       </Box>
       <Box component="span" aria-hidden data-count="" sx={{ gridArea: "1 / 1" }}>
-        {parsed ? `0${parsed.suffix}` : text}
+        {text}
       </Box>
     </Box>
   );
@@ -235,85 +174,43 @@ function CountReel({
 
 export function ReelText({
   text,
-  delay = 0,
   duration,
+  motion,
   stagger = 0.028,
   variant = "reel",
 }: ReelTextProps) {
   if (variant === "count") {
-    return <CountReel text={text} delay={delay} duration={duration ?? reelCountDuration} />;
+    return (
+      <CountReel
+        text={text}
+        duration={duration ?? reelCountDuration}
+        motion={motion}
+      />
+    );
   }
 
   return (
-    <Reel text={text} delay={delay} duration={duration ?? 0.9} stagger={stagger} />
+    <Reel
+      text={text}
+      duration={duration ?? 0.9}
+      motion={motion}
+      stagger={stagger}
+    />
   );
 }
 
 function Reel({
   text,
-  delay,
   duration,
+  motion,
   stagger,
 }: {
   text: string;
-  delay: number;
   duration: number;
+  motion?: string;
   stagger: number;
 }) {
-  const root = useRef<HTMLSpanElement>(null);
   const chars = graphemes(text);
-
-  useGSAP(
-    (_context, contextSafe) => {
-      const scope = root.current;
-      if (!scope) return;
-
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (reduceMotion) return;
-
-      const spin = () => {
-        const strips = gsap.utils.toArray<HTMLElement>("[data-reel]", scope);
-
-        strips.forEach((strip, index) => {
-          const reel = strip.parentElement;
-          if (!reel) return;
-
-          const distance = strip.offsetHeight - reel.offsetHeight;
-          const start = delay + index * stagger;
-          gsap.fromTo(
-            strip,
-            { y: -distance },
-            {
-              y: 0,
-              duration,
-              delay: start,
-              ease: "power4.out",
-              onStart() {
-                gsap.set(strip, { opacity: 1 });
-              },
-            },
-          );
-        });
-      };
-      const trackedSpin = contextSafe ? contextSafe(spin) : spin;
-
-      const start = () => {
-        if (document.fonts?.ready) {
-          document.fonts.ready.then(() => {
-            if (scope.isConnected) trackedSpin();
-          });
-          return;
-        }
-
-        trackedSpin();
-      };
-
-      whenHeroPlays(scope, start);
-    },
-    { scope: root, dependencies: [text, delay, duration, stagger] },
-  );
 
   const words: { chars: string[]; start: number }[] = [];
   chars.forEach((char, index) => {
@@ -328,7 +225,9 @@ function Reel({
   return (
     <Box
       component="span"
-      ref={root}
+      data-motion={motion}
+      data-reel-duration={duration}
+      data-reel-stagger={stagger}
       sx={{
         position: "relative",
         display: "inline-block",

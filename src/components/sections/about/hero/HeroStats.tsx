@@ -1,4 +1,3 @@
-import { heroStatPlan } from "@/animations/about";
 import { Columns } from "@/components/layout";
 
 import { HeroStat } from "./HeroStat";
@@ -17,24 +16,23 @@ function amountOf(value: string) {
 }
 
 export function HeroStats({ stats }: { stats: HeroStatItem[] }) {
-  const plan = heroStatPlan(stats.map((stat) => amountOf(stat.value)));
+  const amounts = stats.map((stat) => amountOf(stat.value));
+  const longest = Math.max(...amounts, 1);
   const items = stats.map((stat, index) => ({
     stat,
     index,
-    duration: plan.items[index]?.duration ?? 0,
-    delay: plan.items[index]?.delay ?? 0,
+    duration: (amounts[index] / longest) * 1.6,
   }));
 
   return (
     <Columns component="ul" columns={{ sm: 3 }} gap={{ xs: 2, sm: 0 }}>
-      {items.map(({ stat, index, duration, delay }) => (
+      {items.map(({ stat, index, duration }) => (
         <HeroStat
           key={stat.id}
           icon={stat.icon}
           value={stat.value}
           label={stat.label}
           divided={index > 0}
-          delay={delay}
           duration={duration}
         />
       ))}

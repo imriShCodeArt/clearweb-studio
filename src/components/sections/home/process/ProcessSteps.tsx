@@ -1,6 +1,5 @@
+import Box from "@mui/material/Box";
 import { getTranslations } from "next-intl/server";
-
-import { Sequence } from "@/components/motion";
 
 import { ProcessStep } from "./ProcessStep";
 import { steps } from "./steps";
@@ -9,7 +8,7 @@ export async function ProcessSteps() {
   const t = await getTranslations("home.process");
 
   return (
-    <Sequence
+    <Box
       component="ol"
       sx={{
         display: { xs: "flex", sm: "grid", lg: "flex" },
@@ -38,6 +37,6 @@ export async function ProcessSteps() {
           order={index - 1}
         />
       ))}
-    </Sequence>
+    </Box>
   );
 }

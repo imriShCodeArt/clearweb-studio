@@ -1,8 +1,8 @@
-export { CoinJump } from "./CoinJump";
-export { FadeIn, type FadeFrom } from "./FadeIn";
+export { CascadeMotion } from "./CascadeMotion";
 export { Float, type FloatMotion } from "./float";
-export { Flip } from "./Flip";
-export { HingeDrop, type HingeTransition } from "./HingeDrop";
 export { Intro } from "./Intro";
+export { Motion } from "./Motion";
+export { MotionPage, useMotionPage } from "./MotionPage";
 export { ReelText, type ReelTextVariant } from "./ReelText";
-export { Reveal, RevealGroup, Sequence, Slide } from "./effects";
+export { StaggeredSectionMotion } from "./StaggeredSectionMotion";
+export { useMotionScope } from "./useMotionScope";

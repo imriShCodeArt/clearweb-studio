@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { MotionPage } from "@/components/motion";
 import { ContactSection } from "@/components/sections/contact";
 import { routing } from "@/i18n/routing";
 
@@ -34,5 +35,9 @@ export default async function ContactPage({
 
   setRequestLocale(locale);
 
-  return <ContactSection locale={locale} />;
+  return (
+    <MotionPage>
+      <ContactSection locale={locale} />
+    </MotionPage>
+  );
 }

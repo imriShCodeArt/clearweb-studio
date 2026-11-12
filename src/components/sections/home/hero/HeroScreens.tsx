@@ -1,17 +1,12 @@
 import Box from "@mui/material/Box";
 
-import { homeMotion } from "@/animations/home";
-import { FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 
 export function HeroScreens() {
-  const { screens } = homeMotion.hero;
-
   return (
-    <FadeIn
+    <Motion
       aria-hidden
-      delay={screens.at}
-      duration={screens.duration}
-      from="bottom"
+      motion="screens"
       sx={{
         position: "absolute",
         inset: 0,
@@ -46,6 +41,6 @@ export function HeroScreens() {
           },
         }}
       />
-    </FadeIn>
+    </Motion>
   );
 }

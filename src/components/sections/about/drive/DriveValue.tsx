@@ -2,7 +2,7 @@ import type { ElementType } from "react";
 import Box from "@mui/material/Box";
 import type { SvgIconProps } from "@mui/material/SvgIcon";
 
-import { CoinJump, FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 import { Text } from "@/components/typography";
 
 type DriveValueProps = {
@@ -10,7 +10,6 @@ type DriveValueProps = {
   title: string;
   description: string;
   divided: boolean;
-  delay?: number;
 };
 
 const divider = "1px solid rgba(255, 255, 255, 0.16)";
@@ -20,13 +19,11 @@ export function DriveValue({
   title,
   description,
   divided,
-  delay = 0,
 }: DriveValueProps) {
   return (
-    <FadeIn
+    <Motion
       component="li"
-      delay={delay}
-      from="bottom"
+      motion="value"
       sx={{
         display: "flex",
         alignItems: "center",
@@ -38,7 +35,7 @@ export function DriveValue({
         borderInlineStart: { md: divided ? divider : "none" },
       }}
     >
-      <CoinJump delay={delay}>
+      <Motion motion="coin">
         <Box
           sx={{
             display: "grid",
@@ -53,7 +50,7 @@ export function DriveValue({
         >
           <Icon sx={{ fontSize: 26, color: "primary.main" }} />
         </Box>
-      </CoinJump>
+      </Motion>
       <Box sx={{ minWidth: 0 }}>
         <Text sx={{ fontWeight: 800, fontSize: "1.05rem", lineHeight: 1.2 }}>
           {title}
@@ -62,6 +59,6 @@ export function DriveValue({
           {description}
         </Text>
       </Box>
-    </FadeIn>
+    </Motion>
   );
 }

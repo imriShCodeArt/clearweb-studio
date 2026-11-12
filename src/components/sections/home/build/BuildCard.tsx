@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import type { SvgIconProps } from "@mui/material/SvgIcon";
 import Typography from "@mui/material/Typography";
 
-import { Reveal } from "@/components/motion";
+import { Motion } from "@/components/motion";
 import { Card } from "@/components/surfaces";
 import { Text } from "@/components/typography";
 
@@ -18,7 +18,11 @@ type BuildCardProps = {
 
 export function BuildCard({ Icon, title, description }: BuildCardProps) {
   return (
-    <Reveal component="li" sx={{ display: "flex", minWidth: 0 }}>
+    <Motion
+      component="li"
+      motion="card"
+      sx={{ display: "flex", minWidth: 0 }}
+    >
       <Card
         sx={{
           flex: 1,
@@ -52,6 +56,6 @@ export function BuildCard({ Icon, title, description }: BuildCardProps) {
           />
         </Box>
       </Card>
-    </Reveal>
+    </Motion>
   );
 }

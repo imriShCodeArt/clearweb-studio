@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 
 import { Arrow } from "@/components/icons";
-import { Reveal } from "@/components/motion";
+import { Motion } from "@/components/motion";
 
 import { ProcessStepCopy } from "./ProcessStepCopy";
 import { ProcessStepImage } from "./ProcessStepImage";
@@ -26,8 +26,9 @@ export function ProcessStep({
   order = 0,
 }: ProcessStepProps) {
   return (
-    <Reveal
+    <Motion
       component="li"
+      motion="item"
       sx={{
         position: "relative",
         display: "flex",
@@ -60,6 +61,6 @@ export function ProcessStep({
           description={description}
         />
       </Box>
-    </Reveal>
+    </Motion>
   );
 }

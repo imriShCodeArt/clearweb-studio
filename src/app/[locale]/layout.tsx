@@ -4,7 +4,6 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { motionStartCss } from "@/animations/home";
 import { AppProviders } from "@/components/providers";
 import { AppShell } from "@/components/shell";
 import { shellContent } from "@/config/site";
@@ -63,7 +62,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={direction} className={heebo.variable}>
       <body>
-        <style dangerouslySetInnerHTML={{ __html: motionStartCss }} />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppProviders direction={direction}>
             <AppShell

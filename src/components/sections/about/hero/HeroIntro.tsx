@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
 
-import { aboutMotion } from "@/animations/about";
 import { Columns } from "@/components/layout";
-import { FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 import { Eyebrow, MarkedHeading, Text } from "@/components/typography";
 
 type HeroIntroProps = {
@@ -16,8 +15,6 @@ type HeroIntroProps = {
 const line = { display: "block" } as const;
 
 export function HeroIntro({ eyebrow, line1, name, role, description }: HeroIntroProps) {
-  const { hero } = aboutMotion;
-
   return (
     <Columns
       alignItems="center"
@@ -26,20 +23,20 @@ export function HeroIntro({ eyebrow, line1, name, role, description }: HeroIntro
       columns={{ xs: 1, md: "minmax(0, 1.15fr) minmax(200px, 0.85fr)" }}
     >
       <Box>
-        <FadeIn delay={hero.eyebrow} from="top" sx={{ mb: 2 }}>
+        <Motion motion="eyebrow" sx={{ mb: 2 }}>
           <Eyebrow variant="rule">{eyebrow}</Eyebrow>
-        </FadeIn>
+        </Motion>
         <MarkedHeading level={1} variant="compact">
-          <FadeIn component="span" delay={hero.line1} from="top" sx={line}>
+          <Motion component="span" motion="line1" sx={line}>
             <MarkedHeading.Line>{line1}</MarkedHeading.Line>
-          </FadeIn>
-          <FadeIn component="span" delay={hero.name} sx={line}>
+          </Motion>
+          <Motion component="span" motion="name" sx={line}>
             <MarkedHeading.Line>
               <MarkedHeading.Mark>{name}</MarkedHeading.Mark>
             </MarkedHeading.Line>
-          </FadeIn>
+          </Motion>
         </MarkedHeading>
-        <FadeIn delay={hero.role}>
+        <Motion motion="role">
           <Text
             sx={{
               mt: 1.5,
@@ -51,13 +48,13 @@ export function HeroIntro({ eyebrow, line1, name, role, description }: HeroIntro
           >
             {role}
           </Text>
-        </FadeIn>
+        </Motion>
       </Box>
-      <FadeIn delay={hero.description}>
+      <Motion motion="description">
         <Text tone="secondary" sx={{ maxWidth: 360 }}>
           {description}
         </Text>
-      </FadeIn>
+      </Motion>
     </Columns>
   );
 }

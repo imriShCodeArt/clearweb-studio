@@ -8,8 +8,7 @@ import {
   OfferingsSection,
   WorkSection,
 } from "@/components/sections/services";
-import { ServicesBackdrop } from "@/components/sections/services/ServicesBackdrop";
-import { ServicesMotion } from "@/components/sections/services/ServicesMotion";
+import { MotionPage } from "@/components/motion";
 import { routing } from "@/i18n/routing";
 
 export default async function ServicesPage({
@@ -32,14 +31,13 @@ export default async function ServicesPage({
         pt: { xs: "72px", md: "90px" },
       }}
     >
-      <ServicesBackdrop />
-      <ServicesMotion>
+      <MotionPage>
         <Box sx={{ position: "relative", zIndex: 1 }}>
           <HeroSection />
           <OfferingsSection />
           <WorkSection />
         </Box>
-      </ServicesMotion>
+      </MotionPage>
     </Box>
   );
 }

@@ -1,13 +1,11 @@
 import Image from "next/image";
 
-import { aboutMotion } from "@/animations/about";
-import { FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 
 export function HeroPortrait() {
   return (
-    <FadeIn
-      delay={aboutMotion.hero.portrait}
-      from="bottom"
+    <Motion
+      motion="portrait"
       sx={{
         position: "relative",
         height: 340,
@@ -31,6 +29,6 @@ export function HeroPortrait() {
         sizes="(max-width: 900px) 100vw, 560px"
         style={{'overflow':'visible'}}
       />
-    </FadeIn>
+    </Motion>
   );
 }

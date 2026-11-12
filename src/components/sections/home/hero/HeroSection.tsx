@@ -3,12 +3,12 @@ import Stack from "@mui/material/Stack";
 
 import { getTranslations } from "next-intl/server";
 
-import { homeMotion } from "@/animations/home";
 import { PlayLink, PrimaryButton } from "@/components/actions";
-import { FadeIn, HingeDrop, ReelText, Slide } from "@/components/motion";
+import { Motion, ReelText } from "@/components/motion";
 import { Eyebrow, MarkedHeading, Text } from "@/components/typography";
 
 import { HeroContainer } from "./HeroContainer";
+import { HeroMotion } from "./HeroMotion";
 
 const slideSX = {
   display: "flex",
@@ -28,10 +28,10 @@ const slideSX = {
 
 export async function HeroSection() {
   const t = await getTranslations("home.hero");
-  const { eyebrow, line1, line2, description, start, process } = homeMotion.hero;
 
   return (
-    <HeroContainer>
+    <HeroMotion>
+      <HeroContainer>
         <Box
           sx={{
             position: "relative",
@@ -39,45 +39,37 @@ export async function HeroSection() {
             pb: { xs: 8, md: 12 },
           }}
         >
-          <Slide from="top" trigger="load" sx={slideSX}>
-            <FadeIn delay={eyebrow.at} from="top">
+          <Motion motion="panel" sx={slideSX}>
+            <Motion motion="eyebrow">
               <Eyebrow>{t("eyebrow")}</Eyebrow>
-            </FadeIn>
+            </Motion>
             <MarkedHeading level={1}>
               <MarkedHeading.Line tilt>
-                <ReelText text={t("line1")} delay={line1.at} />
+                <ReelText text={t("line1")} motion="line1" />
               </MarkedHeading.Line>
               <MarkedHeading.Line>
                 <MarkedHeading.Mark>
-                  <ReelText text={t("line2")} delay={line2.at} />
+                  <ReelText text={t("line2")} motion="line2" />
                 </MarkedHeading.Mark>
               </MarkedHeading.Line>
             </MarkedHeading>
-            <HingeDrop
-              delay={description.at}
-              transition={description.hinge}
+            <Motion
+              motion="description"
               sx={{ display: "block", maxWidth: 360 }}
             >
               <Text tone="secondary">{t("description")}</Text>
-            </HingeDrop>
+            </Motion>
             <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
-              <HingeDrop
-                delay={start.at}
-                transition={start.hinge}
-                sx={{ display: "inline-flex" }}
-              >
+              <Motion motion="start" sx={{ display: "inline-flex" }}>
                 <PrimaryButton>{t("start")}</PrimaryButton>
-              </HingeDrop>
-              <HingeDrop
-                delay={process.at}
-                transition={process.hinge}
-                sx={{ display: "inline-flex" }}
-              >
+              </Motion>
+              <Motion motion="process" sx={{ display: "inline-flex" }}>
                 <PlayLink href="#process">{t("process")}</PlayLink>
-              </HingeDrop>
+              </Motion>
             </Stack>
-          </Slide>
+          </Motion>
         </Box>
-    </HeroContainer>
+      </HeroContainer>
+    </HeroMotion>
   );
 }

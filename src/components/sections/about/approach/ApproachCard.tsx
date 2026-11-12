@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import { FadeIn, Float } from "@/components/motion";
+import { Float, Motion } from "@/components/motion";
 import { Card } from "@/components/surfaces";
 import { Text } from "@/components/typography";
 
@@ -12,7 +12,6 @@ type ApproachCardProps = {
     width: number;
     height: number;
   };
-  delay?: number;
   index?: number;
 };
 
@@ -20,14 +19,12 @@ export function ApproachCard({
   title,
   description,
   image,
-  delay = 0,
   index = 0,
 }: ApproachCardProps) {
   return (
-    <FadeIn
+    <Motion
       component="li"
-      delay={delay}
-      from="bottom"
+      motion="item"
       sx={{ display: "flex", minWidth: 0, transformStyle: "preserve-3d" }}
     >
       <Card
@@ -57,6 +54,6 @@ export function ApproachCard({
           </Text>
         </Box>
       </Card>
-    </FadeIn>
+    </Motion>
   );
 }

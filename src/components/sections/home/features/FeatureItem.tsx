@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { CoinJump, Reveal } from "@/components/motion";
+import { Motion } from "@/components/motion";
 
 function FeatureDivider() {
   return (
@@ -26,7 +26,6 @@ type FeatureItemProps = {
   title: string;
   description: string;
   divided: boolean;
-  order?: number;
 };
 
 export function FeatureItem({
@@ -34,11 +33,11 @@ export function FeatureItem({
   title,
   description,
   divided,
-  order = 0,
 }: FeatureItemProps) {
   return (
-    <Reveal
+    <Motion
       component="li"
+      motion="item"
       sx={{
         display: "flex",
         flex: 1,
@@ -61,7 +60,9 @@ export function FeatureItem({
           justifyContent: "flex-start",
         }}
       >
-        <CoinJump order={order}>{icon}</CoinJump>
+        <Motion motion="coin" sx={{ display: "grid", placeItems: "center" }}>
+          {icon}
+        </Motion>
         <Box sx={{ minWidth: 0 }}>
           <Typography
             sx={{
@@ -85,6 +86,6 @@ export function FeatureItem({
           </Typography>
         </Box>
       </Box>
-    </Reveal>
+    </Motion>
   );
 }

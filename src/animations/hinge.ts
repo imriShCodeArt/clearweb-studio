@@ -1,3 +1,5 @@
+import { gsap } from "@/lib/gsap";
+
 const SWING_DECAY = 0.6;
 const MIN_SWING = 2.5;
 
@@ -98,17 +100,44 @@ export function swingDuration(
   return Math.max(0.1, motion.settle * Math.max(travel, 0.5));
 }
 
-/** Seconds from the first swing until the hinge is flat. The fade runs inside that. */
-export function hingeSpan(base: HingeBase, transition?: HingeTransition) {
+export function addHinge(
+  timeline: gsap.core.Timeline,
+  element: HTMLElement,
+  base: HingeBase,
+  transition: HingeTransition | undefined,
+  at: number | string,
+) {
   const motion = resolveHinge(base, transition);
   const targets = swingTargets(motion.overshoot, motion.rebound);
+  const hinge = gsap.timeline();
   let from = motion.rotateX;
-  let total = 0;
+
+  gsap.set(element, {
+    autoAlpha: 0,
+    rotateX: motion.rotateX,
+    transformOrigin: "top center",
+    transformPerspective: motion.perspective,
+  });
 
   targets.forEach((to, index) => {
-    total += swingDuration(from, to, index, targets, motion);
+    const duration = swingDuration(from, to, index, targets, motion);
+    const ease =
+      index === 0
+        ? "power3.out"
+        : index === targets.length - 1
+          ? "power2.out"
+          : "sine.inOut";
+
+    hinge.to(element, { rotateX: to, duration, ease });
+    if (index === 0) {
+      hinge.to(
+        element,
+        { autoAlpha: 1, duration: motion.fade, ease: "power2.out" },
+        0,
+      );
+    }
     from = to;
   });
 
-  return total;
+  timeline.add(hinge, at);
 }

@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
 
-import { servicesMotion } from "@/animations/services";
 import { Columns } from "@/components/layout";
-import { FadeIn } from "@/components/motion";
+import { Motion } from "@/components/motion";
 
 import { beamFrames } from "./beam";
 import type { WorkStep } from "./steps";
@@ -28,11 +27,10 @@ export function WorkSteps({ steps }: { steps: WorkStep[] }) {
       }}
     >
       {steps.map((step, index) => (
-        <FadeIn
+        <Motion
           component="li"
           key={step.id}
-          delay={servicesMotion.lead + index * servicesMotion.stagger}
-          from="bottom"
+          motion="item"
           sx={{ position: "relative", minWidth: 0 }}
         >
           <WorkStepLine index={index} count={steps.length} />
@@ -40,7 +38,7 @@ export function WorkSteps({ steps }: { steps: WorkStep[] }) {
             <WorkStepMobile step={step} index={index} count={steps.length} />
           </Box>
           <WorkStepDesktop step={step} index={index} />
-        </FadeIn>
+        </Motion>
       ))}
     </Columns>
   );

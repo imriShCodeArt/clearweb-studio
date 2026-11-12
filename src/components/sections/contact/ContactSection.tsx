@@ -8,59 +8,62 @@ import { ContactBackdrop } from "./ContactBackdrop";
 import { ContactBar } from "./ContactBar";
 import { ContactForm } from "./ContactForm";
 import { ContactIntro } from "./ContactIntro";
+import { ContactMotion } from "./ContactMotion";
 
 export async function ContactSection({ locale }: { locale: Locale }) {
   const direction = getLocaleDirection(locale);
 
   return (
-    <Box
-      component="section"
-      sx={{
-        position: "relative",
-        isolation: "isolate",
-        display: "flex",
-        flexDirection: "column",
-        minHeight: { md: "90svh" },
-        mt: { xs: "-72px", md: "-90px" },
-        overflow: "hidden",
-        backgroundColor: "#0B0C0D",
-      }}
-    >
-      <ContactBackdrop />
-
-      <Container
+    <ContactMotion>
+      <Box
+        component="section"
         sx={{
           position: "relative",
-          zIndex: 1,
-          flex: 1,
+          isolation: "isolate",
           display: "flex",
-          alignItems: "center",
-          maxWidth: 1200,
-          pt: { xs: "104px", md: "128px" },
-          pb: { xs: 5, md: 6 },
+          flexDirection: "column",
+          minHeight: { md: "90svh" },
+          mt: { xs: "-72px", md: "-90px" },
+          overflow: "hidden",
+          backgroundColor: "#0B0C0D",
         }}
       >
-        <Box
-          dir="ltr"
+        <ContactBackdrop />
+
+        <Container
           sx={{
-            display: "grid",
+            position: "relative",
+            zIndex: 1,
+            flex: 1,
+            display: "flex",
             alignItems: "center",
-            width: "100%",
-            gap: { xs: 5, lg: 8 },
-            gridTemplateColumns: {
-              xs: "1fr",
-              lg: "minmax(0, 1fr) minmax(320px, 440px)",
-            },
+            maxWidth: 1200,
+            pt: { xs: "104px", md: "128px" },
+            pb: { xs: 5, md: 6 },
           }}
         >
-          <ContactIntro locale={locale} />
-          <Box dir={direction}>
-            <ContactForm />
+          <Box
+            dir="ltr"
+            sx={{
+              display: "grid",
+              alignItems: "center",
+              width: "100%",
+              gap: { xs: 5, lg: 8 },
+              gridTemplateColumns: {
+                xs: "1fr",
+                lg: "minmax(0, 1fr) minmax(320px, 440px)",
+              },
+            }}
+          >
+            <ContactIntro locale={locale} />
+            <Box dir={direction}>
+              <ContactForm />
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
 
-      <ContactBar />
-    </Box>
+        <ContactBar />
+      </Box>
+    </ContactMotion>
   );
 }

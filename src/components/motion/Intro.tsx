@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import Box, { type BoxProps } from "@mui/material/Box";
 
-import { beats, homeMotion } from "@/animations/home";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 export function Intro(props: BoxProps) {
@@ -28,8 +27,8 @@ export function Intro(props: BoxProps) {
         { autoAlpha: 0 },
         {
           autoAlpha: 1,
-          duration: homeMotion.appBar.duration,
-          ease: homeMotion.appBar.ease,
+          duration: 0.45,
+          ease: "power2.out",
           immediateRender: true,
           onComplete: () => {
             page.dataset.intro = "1";
@@ -40,5 +39,5 @@ export function Intro(props: BoxProps) {
     { scope: root },
   );
 
-  return <Box ref={root} {...props} data-animate={beats.appBar} />;
+  return <Box ref={root} {...props} />;
 }
