@@ -18,7 +18,7 @@ const headingComponent = {
 } as const;
 
 const displayFontSize = {
-  1: "clamp(2.75rem, 15vw, 6rem)",
+  1: "clamp(2.75rem, 15vw, 5rem)",
   2: "clamp(2rem, 9.5vw, 3.75rem)",
   3: "clamp(1.5rem, 1.15rem + 1.4vw, 3rem)",
   4: "clamp(1.25rem, 1.05rem + 0.7vw, 2.125rem)",

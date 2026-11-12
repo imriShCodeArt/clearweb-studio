@@ -77,7 +77,7 @@ export function HeroMotion({ children }: { children: ReactNode }) {
       });
     }
     if (line1) addReel(timeline, line1, { at: 1.22 });
-    if (line2) addReel(timeline, line2, { at: 1.25 });
+    if (line2) addReel(timeline, line2, { at: 1.5 });
     if (description) {
       addHinge(timeline, description, hinge, descriptionHinge, 1.95);
     }
@@ -86,7 +86,7 @@ export function HeroMotion({ children }: { children: ReactNode }) {
     if (screens) {
       addEntrance(timeline, screens, {
         at: 3.85,
-        direction: "bottom",
+        direction: "left",
         duration: 2,
         ease: "power2.out",
       });
