@@ -7,7 +7,7 @@ const routes = {
   process: "/#process",
   features: "/#features",
   about: "/about",
-  privacy: "/#privacy",
+  privacy: "/privacy",
   terms: "/#terms",
   accessibility: "/#accessibility",
   contact: "/contact",

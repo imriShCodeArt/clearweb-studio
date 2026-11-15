@@ -307,5 +307,48 @@
       "location": "Based in Israel",
       "hours": "Sun – Thu, 08:00 – 20:00"
     }
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy | Clear Web",
+    "metaDescription": "How Clear Web collects, uses and protects personal information submitted through this website.",
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "updated": "Last updated: November 15, 2026",
+    "intro": "This policy explains how Clear Web handles personal information when you use this website or contact us about a project.",
+    "contactPage": "Contact page",
+    "sections": {
+      "controller": {
+        "title": "Who we are",
+        "body": "Clear Web is the controller of the personal information described in this policy. We operate as a web development studio based in Israel."
+      },
+      "data": {
+        "title": "Information we collect",
+        "body": "When you submit the contact form, we collect the details you provide: name, email address, phone number (optional), and message. We may also receive basic technical information from your browser or email provider while delivering or securing that communication."
+      },
+      "purpose": {
+        "title": "How we use your information",
+        "body": "We use your information to respond to inquiries, discuss potential projects, and manage related communication. We do not sell your personal information or use it for unrelated marketing."
+      },
+      "sharing": {
+        "title": "Service providers",
+        "body": "We use trusted processors that help us operate the website and deliver messages. In particular, contact-form messages may be sent through an email delivery service so we can receive and reply to your inquiry. These providers process information only as needed to provide their services."
+      },
+      "retention": {
+        "title": "How long we keep it",
+        "body": "We keep inquiry details only for as long as needed to answer you and manage the related conversation, unless a longer period is required for legal, accounting, or security reasons."
+      },
+      "rights": {
+        "title": "Your rights",
+        "body": "Depending on applicable law, you may ask to access, correct, or delete personal information we hold about you, or ask us to limit how it is used. To make a request, contact us using the details below."
+      },
+      "security": {
+        "title": "Security",
+        "body": "We take reasonable technical and organizational measures to protect personal information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "If you have questions about this policy or your personal information, reach out through any of the channels below."
+      }
+    }
   }
 }
