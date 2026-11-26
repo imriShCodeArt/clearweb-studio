@@ -60,7 +60,7 @@ export function Footer({
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url(/footer/footer-bg-image.png)",
+          backgroundImage: "url(/footer/footer-bg-image.webp)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center bottom",
           backgroundSize: "cover",

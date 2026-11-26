@@ -83,7 +83,7 @@ export async function HeroSection() {
           <Image
             alt=""
             {...imageProps}
-            src="/services/hero/services-hero-labtop-screens.png"
+            src="/services/hero/services-hero-labtop-screens.webp"
           />
         </Motion>
       </HeroContainer>

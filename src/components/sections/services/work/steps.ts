@@ -1,19 +1,19 @@
 export const steps = [
   {
     id: "discovery",
-    image: "/services/work/services-work-section-01-discovery.png",
+    image: "/services/work/services-work-section-01-discovery.webp",
   },
   {
     id: "architecture",
-    image: "/services/work/services-work-section-02-architecture.png",
+    image: "/services/work/services-work-section-02-architecture.webp",
   },
   {
     id: "development",
-    image: "/services/work/services-work-section-03-development.png",
+    image: "/services/work/services-work-section-03-development.webp",
   },
   {
     id: "launch",
-    image: "/services/work/services-work-section-04-launch.png",
+    image: "/services/work/services-work-section-04-launch.webp",
   },
 ] as const;
 

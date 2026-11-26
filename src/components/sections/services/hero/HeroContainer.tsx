@@ -16,7 +16,7 @@ function HeroStones() {
       }}
       sx={{
         zIndex: 0,
-        backgroundImage: "url(/services/hero/services-hero-bg-stones.png)",
+        backgroundImage: "url(/services/hero/services-hero-bg-stones.webp)",
         backgroundRepeat: "no-repeat",
         backgroundSize: { xs: "auto 72%", sm: "auto 90%", lg: "auto 100%" },
         pointerEvents: "none",
@@ -45,7 +45,7 @@ function HeroStonesAccent() {
         maxWidth: 300,
         minWidth: { xs: 140, sm: 180 },
         aspectRatio: "1",
-        backgroundImage: "url(/services/hero/services-hero-bg-stones.png)",
+        backgroundImage: "url(/services/hero/services-hero-bg-stones.webp)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         pointerEvents: "none",

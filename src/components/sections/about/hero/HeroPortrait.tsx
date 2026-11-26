@@ -22,7 +22,7 @@ export function HeroPortrait() {
       }}
     >
       <Image
-        src="/about/hero/about-hero-bg.png"
+        src="/about/hero/about-hero-bg.webp"
         alt=""
         fill
         priority

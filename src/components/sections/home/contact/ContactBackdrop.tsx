@@ -11,7 +11,7 @@ const photoShade = [
   "rgba(11, 12, 13, 0.38) 100%)",
 ].join(" ");
 
-const photo = "/homepage/contact/contact-section-bg.png";
+const photo = "/homepage/contact/contact-section-bg.webp";
 
 export function ContactBackdrop() {
   return (
